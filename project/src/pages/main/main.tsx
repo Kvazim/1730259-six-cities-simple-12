@@ -5,15 +5,6 @@ type MainScreenProps = {
 }
 
 function Main({ rentalOffers }: MainScreenProps): JSX.Element {
-
-  const getCards = () => {
-    const cards = [];
-    for (let i = 0; i < rentalOffers; i++) {
-      cards.push(<CitiesCard/>);
-    }
-    return cards;
-  };
-
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -85,7 +76,7 @@ function Main({ rentalOffers }: MainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{rentalOffers} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -102,9 +93,11 @@ function Main({ rentalOffers }: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {
-                  getCards()
-                }
+                <CitiesCard/>
+                <CitiesCard/>
+                <CitiesCard/>
+                <CitiesCard/>
+                <CitiesCard/>
               </div>
             </section>
             <div className="cities__right-section">

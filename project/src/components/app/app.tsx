@@ -1,10 +1,10 @@
 import Main from '../../pages/main/main';
 
-type AppScreenProps = {
+type AppProps = {
   rentalOffers: number;
-}
+};
 
-function App({rentalOffers}: AppScreenProps): JSX.Element {
+function App({rentalOffers}: AppProps): JSX.Element {
   return (
     <Main rentalOffers={rentalOffers}/>
   );
