@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import Logo from '../logo/logo';
 
 function Header(): JSX.Element {
@@ -15,9 +16,9 @@ function Header(): JSX.Element {
                 </div>
               </li>
               <li className="header__nav-item">
-                <a className="header__nav-link" href="/">
+                <Link className="header__nav-link" to="#todo">
                   <span className="header__signout">Sign out</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
