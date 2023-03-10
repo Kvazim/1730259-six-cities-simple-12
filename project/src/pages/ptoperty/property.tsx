@@ -1,9 +1,13 @@
+import { Helmet } from 'react-helmet-async';
 import {Link} from 'react-router-dom';
 import Header from '../../components/header/header';
 
 function Property(): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>six cities simple. Страница предложения</title>
+      </Helmet>
       <Header />
 
       <main className="page__main page__main--property">

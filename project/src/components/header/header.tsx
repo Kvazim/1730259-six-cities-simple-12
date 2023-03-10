@@ -1,27 +1,16 @@
-import {Link} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Logo from '../logo/logo';
+import UserNav from '../user-nav/user-nav';
+import { AuthorizationStatus } from '../../consts';
 
 function Header(): JSX.Element {
+  const location = useLocation();
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <Logo />
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <div className="header__nav-profile">
-                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </div>
-              </li>
-              <li className="header__nav-item">
-                <Link className="header__nav-link" to="#todo">
-                  <span className="header__signout">Sign out</span>
-                </Link>
-              </li>
-            </ul>
-          </nav>
+          { location.pathname !== '/login' ? <UserNav authorizationStatus = {AuthorizationStatus.NoAuth} /> : null }
         </div>
       </div>
     </header>
