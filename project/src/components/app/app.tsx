@@ -7,16 +7,16 @@ import Property from '../../pages/ptoperty/property';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 
 type AppProps = {
-  rentalOffers: number;
+  placesCount: number;
 };
 
-function App({ rentalOffers }: AppProps): JSX.Element {
+function App({ placesCount }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root} />
-          <Route index element={<Main rentalOffers={rentalOffers} />} />
+          <Route index element={<Main placesCount={placesCount} />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.Offer} element={<Property />} />
           <Route path="*" element={<PageNotFound />} />
