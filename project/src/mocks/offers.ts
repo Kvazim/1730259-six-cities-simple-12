@@ -25,7 +25,6 @@ export const offers: Offers = [
       name: 'Angelina',
       isPro: true,
     },
-
   },
   {
     id: 2,
@@ -51,7 +50,6 @@ export const offers: Offers = [
       name: 'Angelina',
       isPro: false,
     },
-
   },
   {
     id: 3,
@@ -77,7 +75,6 @@ export const offers: Offers = [
       name: 'Angelina',
       isPro: true,
     },
-
   },
   {
     id: 4,
@@ -103,7 +100,6 @@ export const offers: Offers = [
       name: 'Angelina',
       isPro: true,
     },
-
   },
   {
     id: 5,
@@ -129,6 +125,5 @@ export const offers: Offers = [
       name: 'Angelina',
       isPro: true,
     },
-
   },
 ];

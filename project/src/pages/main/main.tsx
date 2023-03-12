@@ -5,11 +5,10 @@ import { Offers } from '../../types/cards';
 import CitiesEmpty from '../cities-empty/cities-empty';
 
 type MainScreenProps = {
-  placesOffer: number;
   offers: Offers;
 }
 
-function Main({ placesOffer, offers }: MainScreenProps): JSX.Element {
+function Main({ offers }: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -20,7 +19,7 @@ function Main({ placesOffer, offers }: MainScreenProps): JSX.Element {
       {
         Array.isArray(offers) && offers.length > 0
           ?
-          <Cities placesOffer={placesOffer} offers={offers} />
+          <Cities offers={offers} />
           :
           <CitiesEmpty />
       }

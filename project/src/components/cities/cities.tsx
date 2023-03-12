@@ -3,11 +3,10 @@ import { Offers } from '../../types/cards';
 import Tabs from '../tabs/tabs';
 
 type CitiesProp = {
-  placesOffer: number;
   offers: Offers;
 }
 
-function Cities({ placesOffer, offers }: CitiesProp): JSX.Element {
+function Cities({ offers }: CitiesProp): JSX.Element {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -16,7 +15,7 @@ function Cities({ placesOffer, offers }: CitiesProp): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{placesOffer} places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -33,12 +32,11 @@ function Cities({ placesOffer, offers }: CitiesProp): JSX.Element {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <CitiesCard />
-              <CitiesCard />
-              <CitiesCard />
-              <CitiesCard />
-              <CitiesCard />
-              <CitiesCard />
+              {
+                offers.map((offer) => (
+                  <CitiesCard key={offer.id} offer={offer} />
+                ))
+              }
             </div>
           </section>
           <div className="cities__right-section">
