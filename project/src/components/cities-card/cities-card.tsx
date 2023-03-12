@@ -1,4 +1,9 @@
 import {Link} from 'react-router-dom';
+// import { Offer } from '../../types/cards';
+
+// type CitiesCardProp = {
+//   offer: Offer;
+// }
 
 function CitiesCard(): JSX.Element {
   return (
