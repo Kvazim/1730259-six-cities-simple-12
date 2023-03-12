@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import CitiesCard from '../../components/cities-card/cities-card';
 import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
@@ -9,6 +10,9 @@ type MainScreenProps = {
 function Main({ rentalOffers }: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>six cities simple. Main page</title>
+      </Helmet>
       <Header />
 
       <main className="page__main page__main--index">
@@ -35,11 +39,11 @@ function Main({ rentalOffers }: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <CitiesCard/>
-                <CitiesCard/>
-                <CitiesCard/>
-                <CitiesCard/>
-                <CitiesCard/>
+                <CitiesCard />
+                <CitiesCard />
+                <CitiesCard />
+                <CitiesCard />
+                <CitiesCard />
               </div>
             </section>
             <div className="cities__right-section">
