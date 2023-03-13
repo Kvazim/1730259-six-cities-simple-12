@@ -1,5 +1,4 @@
-import { Link, generatePath } from 'react-router-dom';
-import { AppRoute } from '../../consts';
+import { Link } from 'react-router-dom';
 import { Offer } from '../../types/cards';
 
 type CitiesCardProp = {
@@ -20,7 +19,7 @@ function CitiesCard({ offer }: CitiesCardProp): JSX.Element {
           null
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={generatePath(AppRoute.Offer, { id: `${id}`})}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
         </Link>
       </div>
@@ -39,7 +38,7 @@ function CitiesCard({ offer }: CitiesCardProp): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Offer, { id: `${id}`})}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

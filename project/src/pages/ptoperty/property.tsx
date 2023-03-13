@@ -1,8 +1,17 @@
 import { Helmet } from 'react-helmet-async';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import Header from '../../components/header/header';
+// import PropertyPhoto from '../../components/property-photo/property-photo';
+import { Offers } from '../../types/cards';
+import { ReviewsList } from '../../types/reviews';
 
-function Property(): JSX.Element {
+type PropertyProps = {
+  offers: Offers;
+  reviews: ReviewsList;
+}
+
+function Property({offers, reviews}:PropertyProps): JSX.Element {
+  // const idRoom = useParams();
   return (
     <div className="page">
       <Helmet>
@@ -13,26 +22,13 @@ function Property(): JSX.Element {
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
-            <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="studio" />
-              </div>
-            </div>
+            {/* <div className="property__gallery">
+              {
+                images.map((photoUrl, index) => (
+                  <PropertyPhoto key={String(photoUrl) + String(index)} photoUrl={photoUrl} />
+                ))
+              }
+            </div> */}
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
