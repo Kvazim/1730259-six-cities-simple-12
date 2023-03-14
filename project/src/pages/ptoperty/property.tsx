@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import {Link, useParams} from 'react-router-dom';
 import Header from '../../components/header/header';
+import PropertyDescription from '../../components/property-description/property-description';
 import PropertyInside from '../../components/property-inside/property-inside';
 import PropertyPhoto from '../../components/property-photo/property-photo';
 import { Offers } from '../../types/cards';
@@ -20,7 +21,9 @@ function Property({offers, reviews}:PropertyProps): JSX.Element {
     return <PageNotFound />;
   }
 
-  const {images, isPremium, rating, type, bedrooms, maxAdults, price, goods, host} = property;
+  const {images, isPremium, rating, type, bedrooms, maxAdults, price, goods, host, description} = property;
+  const offerReview = reviews.find((review) => String(review.id) === String(id));
+  const {} = offerReview;
   return (
     <div className="page">
       <Helmet>
@@ -108,16 +111,20 @@ function Property({offers, reviews}:PropertyProps): JSX.Element {
                   }
                 </div>
                 <div className="property__description">
-                  <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
-                  </p>
+                  {
+                    Array.isArray(description)
+                      ?
+                      description.length > 0
+                      && description.map((item, index) => (
+                        <PropertyDescription key={String(item) + String(index)} description={item} />
+                      ))
+                      :
+                      <PropertyDescription description={description} />
+                  }
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ul className="reviews__list">
                   <li className="reviews__item">
                     <div className="reviews__user user">

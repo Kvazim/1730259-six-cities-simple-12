@@ -30,7 +30,7 @@ export type Card = {
 export type Offer = {
   id: number;
   bedrooms: number;
-  description: string;
+  description: string | string[];
   goods: string[];
   images: string[];
   isPremium: boolean;
