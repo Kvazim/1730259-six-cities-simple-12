@@ -1,29 +1,33 @@
 import { Helmet } from 'react-helmet-async';
-import {Link, useParams} from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import PropertyDescription from '../../components/property-description/property-description';
 import PropertyInside from '../../components/property-inside/property-inside';
 import PropertyPhoto from '../../components/property-photo/property-photo';
+import ReviewsItem from '../../components/reviews-item/reviews-item';
 import { Offers } from '../../types/cards';
 import { ReviewsList } from '../../types/reviews';
-import PageNotFound from '../page-not-found/page-not-found';
+import {changeInPercent} from '../../utils/utils';
+import { SIMILAR_AD_COUNT } from '../../consts';
+import ReviewForm from '../../components/review-form/review-form';
+import {AppRoute} from '../../consts';
 
 type PropertyProps = {
   offers: Offers;
   reviews: ReviewsList;
 }
 
-function Property({offers, reviews}:PropertyProps): JSX.Element {
-  const {id} = useParams();
-  const property = offers.find((offer) => String(offer.id) === String(id));
+function Property({ offers, reviews }: PropertyProps): JSX.Element {
+  const { id } = useParams();
+  const [property] = offers.filter((offer) => String(offer.id) === String(id));
 
   if (property === undefined) {
-    return <PageNotFound />;
+    <Navigate to={AppRoute.PageNotFound} />;
   }
 
-  const {images, isPremium, rating, type, bedrooms, maxAdults, price, goods, host, description} = property;
-  const offerReview = reviews.find((review) => String(review.id) === String(id));
-  const {} = offerReview;
+  const { images, isPremium, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;
+  const [{ review }] = reviews.filter((items) => String(items.id) === String(id)).map((element) => ({ review: element.review }));
+
   return (
     <div className="page">
       <Helmet>
@@ -60,7 +64,7 @@ function Property({offers, reviews}:PropertyProps): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
+                  <span style={{ width: `${changeInPercent(rating)}` }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>
@@ -85,9 +89,9 @@ function Property({offers, reviews}:PropertyProps): JSX.Element {
                 <ul className="property__inside-list">
                   {
                     Array.isArray(goods) && goods.length > 0 &&
-                      goods.map((good, index) => (
-                        <PropertyInside key={String(index) + String(good)} good={good} />
-                      ))
+                    goods.map((good, index) => (
+                      <PropertyInside key={String(index) + String(good)} good={good} />
+                    ))
                   }
                 </ul>
               </div>
@@ -115,86 +119,26 @@ function Property({offers, reviews}:PropertyProps): JSX.Element {
                     Array.isArray(description)
                       ?
                       description.length > 0
-                      && description.map((item, index) => (
+                      && description.map((item, index) =>
                         <PropertyDescription key={String(item) + String(index)} description={item} />
-                      ))
+                      )
                       :
                       <PropertyDescription description={description} />
                   }
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{review.length}</span></h2>
                 <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{ width: '80%' }}></span>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
+                  {
+                    Array.isArray(review)
+                    &&
+                    review.length > 0
+                    &&
+                    review.sort().slice(0, SIMILAR_AD_COUNT).map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
+                  }
                 </ul>
-                <form className="reviews__form form" action="#" method="post">
-                  <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                  <div className="reviews__rating-form form__rating">
-                    <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
-                    <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
-                    <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
-                    <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
-                    <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
-                    <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-                  </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
-                  <div className="reviews__button-wrapper">
-                    <p className="reviews__help">
-                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-                    </p>
-                    <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
-                  </div>
-                </form>
+                <ReviewForm />
               </section>
             </div>
           </div>

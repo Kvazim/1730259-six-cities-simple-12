@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import CitiesCard from '../cities-card/cities-card';
 import { Offers } from '../../types/cards';
 import Tabs from '../tabs/tabs';
@@ -7,6 +8,9 @@ type CitiesProp = {
 }
 
 function Cities({ offers }: CitiesProp): JSX.Element {
+  const [focusCard, setFocusCard] = useState({});
+  console.log(focusCard);
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -34,7 +38,7 @@ function Cities({ offers }: CitiesProp): JSX.Element {
             <div className="cities__places-list places__list tabs__content">
               {
                 offers.map((offer) => (
-                  <CitiesCard key={offer.id} offer={offer} />
+                  <CitiesCard key={offer.id} offer={offer} setFocusCard={(e) => setFocusCard(e)} />
                 ))
               }
             </div>

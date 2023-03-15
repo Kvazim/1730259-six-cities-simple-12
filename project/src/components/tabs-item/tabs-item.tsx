@@ -1,17 +1,22 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type TabsItemProps = {
   city: string;
   isActive: boolean;
+  changeCurrentTabs: (location: string) => void;
 }
 
-function TabsItem({city, isActive}:TabsItemProps):JSX.Element {
-
+function TabsItem({ city, isActive, changeCurrentTabs}: TabsItemProps): JSX.Element {
+  const hrefLocation = `/#${city.toLowerCase()}`;
   return (
     <li className="locations__item">
-      <NavLink className = {`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} to="#todo">
+      <Link
+        className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`}
+        to={hrefLocation}
+        onClick={() => changeCurrentTabs(city)}
+      >
         <span>{city}</span>
-      </NavLink>
+      </Link>
     </li>
   );
 }

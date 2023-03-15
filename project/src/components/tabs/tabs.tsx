@@ -11,7 +11,8 @@ function Tabs(): JSX.Element {
     'Dusseldorf',
   ];
 
-  const [isActive,] = useState([false, false, false, true, false, false]);
+  const [currentTabs, setCurrentTabs] = useState(cities[3]);
+  const onClickTabsItem = (city: string) => setCurrentTabs(city);
 
   return (
     <div className="tabs">
@@ -22,7 +23,8 @@ function Tabs(): JSX.Element {
               <TabsItem
                 key={String(city) + String(index)}
                 city={city}
-                isActive={isActive[index]}
+                isActive={currentTabs === city}
+                changeCurrentTabs={onClickTabsItem}
               />
             ))
           }

@@ -23,7 +23,6 @@ function App({ offers, reviews }: AppProps): JSX.Element {
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.Offer} element={<Property offers={offers} reviews={reviews} />} />
           <Route path="*" element={<PageNotFound />} />
-          <Route />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>

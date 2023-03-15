@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import Header from '../../components/header/header';
 import './style.css';
 
-function PageNotFound():JSX.Element {
+function PageNotFound(): JSX.Element {
   return (
     <div className="page">
       <Header />
@@ -9,7 +10,7 @@ function PageNotFound():JSX.Element {
       <main className="page__main page__main--page-not-found">
         <section className="page-not-found">
           <h1 className="page-not-found__title">404 Page not found</h1>
-          <a className="page-not-found__link" href="/"><span>Вернутся на главную страницу</span></a>
+          <Link className="page-not-found__link" to="/"><span>Вернутся на главную страницу</span></Link>
         </section>
       </main>
     </div>

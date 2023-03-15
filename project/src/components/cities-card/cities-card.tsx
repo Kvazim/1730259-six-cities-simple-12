@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/cards';
+import { changeInPercent } from '../../utils/utils';
 
 type CitiesCardProp = {
   offer: Offer;
+  setFocusCard: (offer?: Offer) => void;
 }
 
-function CitiesCard({ offer }: CitiesCardProp): JSX.Element {
-  const {isPremium, previewImage, price, title, type, id} = offer;
+function CitiesCard({ offer, setFocusCard }: CitiesCardProp): JSX.Element {
+  const {isPremium, previewImage, price, title, type, id, rating} = offer;
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseEnter={() => setFocusCard(offer)} onMouseLeave={() => setFocusCard()}>
       {
         isPremium
           ?
@@ -33,7 +35,7 @@ function CitiesCard({ offer }: CitiesCardProp): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: `${changeInPercent(rating)}` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
