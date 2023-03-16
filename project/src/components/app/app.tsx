@@ -21,7 +21,7 @@ function App({ offers, reviews }: AppProps): JSX.Element {
           <Route path={AppRoute.Root} />
           <Route index element={<Main offers={offers} />} />
           <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={AppRoute.Offer} element={<Property offers={offers} reviews={reviews} />} />
+          <Route path={`${AppRoute.Offer}/:id`} element={<Property offers={offers} reviews={reviews} />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

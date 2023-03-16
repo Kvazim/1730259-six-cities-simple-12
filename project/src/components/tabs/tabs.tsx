@@ -1,16 +1,11 @@
 import { useState } from 'react';
 import TabsItem from '../tabs-item/tabs-item';
 
-function Tabs(): JSX.Element {
-  const cities = [
-    'Paris',
-    'Cologne',
-    'Brussels',
-    'Amsterdam',
-    'Hamburg',
-    'Dusseldorf',
-  ];
+type TabsProps = {
+  cities: string[];
+}
 
+function Tabs({cities}: TabsProps): JSX.Element {
   const [currentTabs, setCurrentTabs] = useState(cities[3]);
   const onClickTabsItem = (city: string) => setCurrentTabs(city);
 

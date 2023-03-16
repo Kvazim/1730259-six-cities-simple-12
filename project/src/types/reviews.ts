@@ -2,7 +2,7 @@ export type Review = {
   avatarUrl: string;
   name: string;
   score: number;
-  data: string;
+  date: string;
   text: string;
 }
 

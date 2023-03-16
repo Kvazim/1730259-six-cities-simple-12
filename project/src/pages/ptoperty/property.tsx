@@ -7,10 +7,10 @@ import PropertyPhoto from '../../components/property-photo/property-photo';
 import ReviewsItem from '../../components/reviews-item/reviews-item';
 import { Offers } from '../../types/cards';
 import { ReviewsList } from '../../types/reviews';
-import {changeInPercent} from '../../utils/utils';
+import { changeInPercent } from '../../utils/utils';
 import { SIMILAR_AD_COUNT } from '../../consts';
 import ReviewForm from '../../components/review-form/review-form';
-import {AppRoute} from '../../consts';
+import { AppRoute } from '../../consts';
 
 type PropertyProps = {
   offers: Offers;
@@ -25,7 +25,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
     <Navigate to={AppRoute.PageNotFound} />;
   }
 
-  const { images, isPremium, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;
+  const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;
   const [{ review }] = reviews.filter((items) => String(items.id) === String(id)).map((element) => ({ review: element.review }));
 
   return (
@@ -59,7 +59,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
               }
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {title}
                 </h1>
               </div>
               <div className="property__rating rating">
@@ -74,10 +74,10 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
                   {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {bedrooms} Bedrooms
+                  {bedrooms} {bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {maxAdults} adults
+                  Max {maxAdults} {maxAdults > 1 ? 'adults' : 'adult'}
                 </li>
               </ul>
               <div className="property__price">
@@ -135,7 +135,10 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
                     &&
                     review.length > 0
                     &&
-                    review.sort().slice(0, SIMILAR_AD_COUNT).map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
+                    review.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+                      .reverse()
+                      .slice(0, SIMILAR_AD_COUNT)
+                      .map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
                   }
                 </ul>
                 <ReviewForm />

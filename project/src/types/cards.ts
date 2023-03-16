@@ -15,18 +15,6 @@ export type Card = {
   rating: number;
 }
 
-// export type Place = {
-//   id: number;
-//   bedrooms: number;
-//   description: string;
-//   goods: string[];
-//   images: string[];
-//   maxAdults: number;
-//   host: Host;
-// }
-
-// export type Offer = Place | Card | Host;
-
 export type Offer = {
   id: number;
   bedrooms: number;

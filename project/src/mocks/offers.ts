@@ -3,7 +3,14 @@ import { Offers } from '../types/cards';
 export const offers: Offers = [
   {
     id: 1,
-    images: ['img/apartment-01.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg'],
+    images: [
+      'img/apartment-01.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-03.jpg'
+    ],
     isPremium: true,
     previewImage: 'img/apartment-01.jpg',
     price: 120,
@@ -13,7 +20,8 @@ export const offers: Offers = [
     rating: 4.2,
     bedrooms: 4,
     maxAdults: 4,
-    goods: ['Wi-Fi',
+    goods: [
+      'Wi-Fi',
       'Washing machine',
       'Towels',
       'Heating',
@@ -28,7 +36,14 @@ export const offers: Offers = [
   },
   {
     id: 2,
-    images: ['img/apartment-01.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg'],
+    images: [
+      'img/apartment-01.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-03.jpg'
+    ],
     isPremium: true,
     previewImage: 'img/room.jpg',
     price: 80,
@@ -41,7 +56,8 @@ export const offers: Offers = [
     rating: 4.2,
     bedrooms: 4,
     maxAdults: 4,
-    goods: ['Wi-Fi',
+    goods: [
+      'Wi-Fi',
       'Washing machine',
       'Towels',
       'Heating',
@@ -56,7 +72,14 @@ export const offers: Offers = [
   },
   {
     id: 3,
-    images: ['img/apartment-01.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg'],
+    images: [
+      'img/apartment-01.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-03.jpg'
+    ],
     isPremium: false,
     previewImage: 'img/apartment-02.jpg',
     price: 132,
@@ -66,7 +89,8 @@ export const offers: Offers = [
     rating: 4.2,
     bedrooms: 4,
     maxAdults: 4,
-    goods: ['Wi-Fi',
+    goods: [
+      'Wi-Fi',
       'Washing machine',
       'Towels',
       'Heating',
@@ -81,7 +105,14 @@ export const offers: Offers = [
   },
   {
     id: 4,
-    images: ['img/apartment-01.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg'],
+    images: [
+      'img/apartment-01.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-03.jpg'
+    ],
     isPremium: true,
     previewImage: 'img/apartment-03.jpg',
     price: 180,
@@ -91,7 +122,8 @@ export const offers: Offers = [
     rating: 5,
     bedrooms: 4,
     maxAdults: 4,
-    goods: ['Wi-Fi',
+    goods: [
+      'Wi-Fi',
       'Washing machine',
       'Towels',
       'Heating',
@@ -106,7 +138,14 @@ export const offers: Offers = [
   },
   {
     id: 5,
-    images: ['img/apartment-01.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg'],
+    images: [
+      'img/apartment-01.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-03.jpg'
+    ],
     isPremium: false,
     previewImage: 'img/room.jpg',
     price: 80,
@@ -116,7 +155,8 @@ export const offers: Offers = [
     rating: 3,
     bedrooms: 4,
     maxAdults: 4,
-    goods: ['Wi-Fi',
+    goods: [
+      'Wi-Fi',
       'Washing machine',
       'Towels',
       'Heating',
