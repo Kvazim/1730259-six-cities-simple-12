@@ -10,7 +10,7 @@ type CitiesProp = {
 }
 
 function Cities({ offers }: CitiesProp): JSX.Element {
-  const [focusCard, setFocusCard] = useState<Offer>();
+  const [focusCard, setFocusCard] = useState<Offer | null>(null);
   // eslint-disable-next-line no-console
   console.log(focusCard);
 

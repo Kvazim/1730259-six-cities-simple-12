@@ -5,13 +5,13 @@ import { AppRoute } from '../../consts';
 
 type CitiesCardProp = {
   offer: Offer;
-  onFocusCard: (onFocusCard?: Offer) => void;
+  onFocusCard: (onFocusCard: Offer | null) => void;
 }
 
 function CitiesCard({ offer, onFocusCard }: CitiesCardProp): JSX.Element {
   const {isPremium, previewImage, price, title, type, id, rating} = offer;
   return (
-    <article className="cities__card place-card" onMouseOver={() => onFocusCard(offer)} onMouseOut={() => onFocusCard()}>
+    <article className="cities__card place-card" onMouseOver={() => onFocusCard(offer)} onMouseOut={() => onFocusCard(null)}>
       {
         isPremium
           ?
