@@ -1,9 +1,9 @@
-import { Fragment } from 'react';
+import { Fragment, ChangeEvent } from 'react';
 
 type RatingStarsProps = {
   stars: string[];
-  isChecked: boolean;
-  onChangeChecked: () => void;
+  isChecked: string;
+  onChangeChecked: ({ target }: ChangeEvent<HTMLInputElement>) => void;
 }
 
 function RatingStars({ stars, onChangeChecked, isChecked }: RatingStarsProps): JSX.Element {
@@ -18,7 +18,7 @@ function RatingStars({ stars, onChangeChecked, isChecked }: RatingStarsProps): J
               value={`${stars.length - index}`}
               id={`${stars.length - index}-stars`}
               type="radio"
-              defaultChecked={isChecked}
+              defaultChecked={isChecked === `${stars.length - index}`}
             />
             <label htmlFor={`${stars.length - index}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width="37" height="33">
