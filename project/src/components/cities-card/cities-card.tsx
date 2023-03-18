@@ -22,7 +22,7 @@ function CitiesCard({ offer, onFocusCard }: CitiesCardProp): JSX.Element {
           null
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Offer}/${id}`}>
+        <Link to={`${AppRoute.Offer}${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
         </Link>
       </div>

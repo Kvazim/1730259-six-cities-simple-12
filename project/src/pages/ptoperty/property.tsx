@@ -22,7 +22,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
   const [property] = offers.filter((offer) => String(offer.id) === String(id));
 
   if (property === undefined) {
-    <Navigate to={AppRoute.PageNotFound} />;
+    return <Navigate to={AppRoute.PageNotFound} />;
   }
 
   const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;

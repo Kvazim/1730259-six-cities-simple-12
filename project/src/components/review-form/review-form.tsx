@@ -3,10 +3,11 @@ import { stars } from '../../consts';
 import { ChangeEvent, useState } from 'react';
 
 function ReviewForm(): JSX.Element {
-  const [isChecked, setIsChecked] = useState('0');
-  const onChangeChecked = ({target}: ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(target.value);
+  const [isChecked, setIsChecked] = useState(false);
+  const onChangeChecked = () => {
+    setIsChecked(!isChecked);
   };
+
   const [value, setValue] = useState('');
   const onChangeValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
