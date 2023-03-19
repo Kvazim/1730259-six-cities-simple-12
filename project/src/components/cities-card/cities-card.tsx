@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/cards';
-import { changeInPercent } from '../../utils/utils';
+import { changeInPercent, capitalize } from '../../utils/utils';
 import { AppRoute } from '../../consts';
 import Premium from '../premium/premium';
 
@@ -36,7 +36,7 @@ function CitiesCard({ offer, onFocusCard }: CitiesCardProp): JSX.Element {
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalize(type)}</p>
       </div>
     </article>
   );

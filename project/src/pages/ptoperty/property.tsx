@@ -7,7 +7,7 @@ import PropertyPhoto from '../../components/property-photo/property-photo';
 import ReviewsItem from '../../components/reviews-item/reviews-item';
 import { Offers } from '../../types/cards';
 import { ReviewsList } from '../../types/reviews';
-import { changeInPercent } from '../../utils/utils';
+import { changeInPercent, capitalize } from '../../utils/utils';
 import { SIMILAR_AD_COUNT } from '../../consts';
 import ReviewForm from '../../components/review-form/review-form';
 import { AppRoute } from '../../consts';
@@ -65,7 +65,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {type}
+                  {capitalize(type)}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms} {bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}

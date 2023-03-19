@@ -1,4 +1,4 @@
-export type ApartmentType = 'Apartment' | 'Private room' | 'House' | 'Hotel';
+export type ApartmentType = 'apartment' | 'private room' | 'house' | 'hotel';
 
 export type Host = {
   avatarUrl: string;
