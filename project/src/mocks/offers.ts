@@ -33,6 +33,19 @@ export const offers: Offers = [
       name: 'Angelina',
       isPro: true,
     },
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10,
+      },
+      name: 'Amsterdam'
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 16,
+    },
   },
   {
     id: 2,
@@ -69,6 +82,19 @@ export const offers: Offers = [
       name: 'Angelina',
       isPro: false,
     },
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Amsterdam'
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 16,
+    },
   },
   {
     id: 3,
@@ -101,6 +127,19 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       isPro: true,
+    },
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Amsterdam'
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 16,
     },
   },
   {
@@ -135,6 +174,19 @@ export const offers: Offers = [
       name: 'Angelina',
       isPro: true,
     },
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Amsterdam'
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 16,
+    },
   },
   {
     id: 5,
@@ -167,6 +219,19 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       isPro: true,
+    },
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Amsterdam'
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 16,
     },
   },
 ];

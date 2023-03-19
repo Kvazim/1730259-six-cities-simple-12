@@ -15,6 +15,17 @@ export type Card = {
   rating: number;
 }
 
+export type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
+export type City = {
+  location: Location;
+  name: string;
+}
+
 export type Offer = {
   id: number;
   bedrooms: number;
@@ -29,6 +40,8 @@ export type Offer = {
   title: string;
   type: ApartmentType;
   host: Host;
+  city: City;
+  location: Location;
 }
 
 export type Offers = Offer[];

@@ -4,6 +4,7 @@ import { Offer, Offers } from '../../types/cards';
 import Tabs from '../tabs/tabs';
 import { cities, placesOption } from '../../consts';
 import PlacesSorting from '../places-sorting/places-sorting';
+import Map from '../map/map';
 
 type CitiesProp = {
   offers: Offers;
@@ -11,8 +12,6 @@ type CitiesProp = {
 
 function Cities({ offers }: CitiesProp): JSX.Element {
   const [focusCard, setFocusCard] = useState<Offer | null>(null);
-  // eslint-disable-next-line no-console
-  console.log(focusCard);
 
   return (
     <main className="page__main page__main--index">
@@ -33,7 +32,7 @@ function Cities({ offers }: CitiesProp): JSX.Element {
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <Map points={offers} focusCard={focusCard} />
           </div>
         </div>
       </div>
