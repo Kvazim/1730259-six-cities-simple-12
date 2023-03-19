@@ -5,13 +5,14 @@ import { ChangeEvent, useState } from 'react';
 function ReviewForm(): JSX.Element {
   const [isChecked, setIsChecked] = useState('0');
   const onChangeChecked = ({target}: ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(target.value);
+    if (target.name === 'rating') {
+      setIsChecked(target.value);
+    }
   };
   const [value, setValue] = useState('');
   const onChangeValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
   };
-
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -21,7 +22,12 @@ function ReviewForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit" disabled={isChecked === '0' || (value.length < 50 || value.length > 300)}
+        >
+          Submit
+        </button>
       </div>
     </form>
   );

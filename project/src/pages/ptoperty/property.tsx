@@ -7,10 +7,11 @@ import PropertyPhoto from '../../components/property-photo/property-photo';
 import ReviewsItem from '../../components/reviews-item/reviews-item';
 import { Offers } from '../../types/cards';
 import { ReviewsList } from '../../types/reviews';
-import { changeInPercent } from '../../utils/utils';
+import { changeInPercent, capitalize } from '../../utils/utils';
 import { SIMILAR_AD_COUNT } from '../../consts';
 import ReviewForm from '../../components/review-form/review-form';
 import { AppRoute } from '../../consts';
+import Premium from '../../components/premium/premium';
 
 type PropertyProps = {
   offers: Offers;
@@ -22,7 +23,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
   const [property] = offers.filter((offer) => String(offer.id) === String(id));
 
   if (property === undefined) {
-    <Navigate to={AppRoute.PageNotFound} />;
+    return <Navigate to={AppRoute.PageNotFound} />;
   }
 
   const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;
@@ -48,15 +49,8 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {
-                isPremium
-                  ?
-                  <div className="property__mark">
-                    <span>Premium</span>
-                  </div>
-                  :
-                  null
-              }
+              {isPremium && <Premium className={'property__mark'} />}
+
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -71,7 +65,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {type}
+                  {capitalize(type)}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms} {bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
@@ -106,12 +100,10 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
                   </span>
                   {
                     host.isPro
-                      ?
-                      <span className="property__user-status">
-                        Pro
-                      </span>
-                      :
-                      null
+                    &&
+                    <span className="property__user-status">
+                      Pro
+                    </span>
                   }
                 </div>
                 <div className="property__description">

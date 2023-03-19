@@ -16,7 +16,7 @@ export const offers: Offers = [
     price: 120,
     title: 'Beautiful &amp; luxurious apartment at great location',
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-    type: 'Apartment',
+    type: 'apartment',
     rating: 4.2,
     bedrooms: 4,
     maxAdults: 4,
@@ -32,6 +32,19 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       isPro: true,
+    },
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10,
+      },
+      name: 'Amsterdam'
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 16,
     },
   },
   {
@@ -52,7 +65,7 @@ export const offers: Offers = [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
       'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     ],
-    type: 'Private room',
+    type: 'private room',
     rating: 4.2,
     bedrooms: 4,
     maxAdults: 4,
@@ -68,6 +81,19 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       isPro: false,
+    },
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Amsterdam'
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 16,
     },
   },
   {
@@ -85,7 +111,7 @@ export const offers: Offers = [
     price: 132,
     title: 'Canal View Prinsengracht',
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-    type: 'Apartment',
+    type: 'apartment',
     rating: 4.2,
     bedrooms: 4,
     maxAdults: 4,
@@ -101,6 +127,19 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       isPro: true,
+    },
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Amsterdam'
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 16,
     },
   },
   {
@@ -118,7 +157,7 @@ export const offers: Offers = [
     price: 180,
     title: 'Nice, cozy, warm big bed apartment',
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-    type: 'Apartment',
+    type: 'apartment',
     rating: 5,
     bedrooms: 4,
     maxAdults: 4,
@@ -134,6 +173,19 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       isPro: true,
+    },
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Amsterdam'
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 16,
     },
   },
   {
@@ -151,7 +203,7 @@ export const offers: Offers = [
     price: 80,
     title: 'Wood and stone place',
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-    type: 'Private room',
+    type: 'private room',
     rating: 3,
     bedrooms: 4,
     maxAdults: 4,
@@ -167,6 +219,19 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       isPro: true,
+    },
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Amsterdam'
+    },
+    location: {
+      latitude: 52.3409553943508,
+      longitude: 4.939309666406198,
+      zoom: 16,
     },
   },
 ];

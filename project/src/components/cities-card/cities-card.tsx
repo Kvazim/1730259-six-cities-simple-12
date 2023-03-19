@@ -1,28 +1,21 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/cards';
-import { changeInPercent } from '../../utils/utils';
+import { changeInPercent, capitalize } from '../../utils/utils';
 import { AppRoute } from '../../consts';
+import Premium from '../premium/premium';
 
 type CitiesCardProp = {
   offer: Offer;
-  onFocusCard: (onFocusCard?: Offer) => void;
+  onFocusCard: (onFocusCard: Offer | null) => void;
 }
 
 function CitiesCard({ offer, onFocusCard }: CitiesCardProp): JSX.Element {
-  const {isPremium, previewImage, price, title, type, id, rating} = offer;
+  const { isPremium, previewImage, price, title, type, id, rating } = offer;
   return (
-    <article className="cities__card place-card" onMouseOver={() => onFocusCard(offer)} onMouseOut={() => onFocusCard()}>
-      {
-        isPremium
-          ?
-          <div className="place-card__mark">
-            <span>Premium</span>
-          </div>
-          :
-          null
-      }
+    <article className="cities__card place-card" onMouseOver={() => onFocusCard(offer)} onMouseOut={() => onFocusCard(null)}>
+      { isPremium && <Premium className={'place-card__mark'} /> }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Offer}/${id}`}>
+        <Link to={`${AppRoute.Offer}${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
         </Link>
       </div>
@@ -43,7 +36,7 @@ function CitiesCard({ offer, onFocusCard }: CitiesCardProp): JSX.Element {
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalize(type)}</p>
       </div>
     </article>
   );
