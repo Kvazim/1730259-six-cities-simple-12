@@ -7,8 +7,9 @@ import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   offers: Offers;
-  focusCard: Offer | null;
+  focusCard?: Offer | null;
   className: string;
+  currrentPageProperty?: number;
 }
 
 const defaultCustomIcon = leaflet.icon({
@@ -23,7 +24,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [14, 40]
 });
 
-function Map({ className, offers, focusCard }: MapProps): JSX.Element {
+function Map({ className, offers, focusCard, currrentPageProperty }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const cityLocation = offers[0].city.location;
   const map = useMap(mapRef, cityLocation);
@@ -39,7 +40,7 @@ function Map({ className, offers, focusCard }: MapProps): JSX.Element {
 
         marker
           .setIcon(
-            focusCard !== null && focusCard === offer
+            focusCard !== null && (focusCard === offer || currrentPageProperty === offer.id)
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -50,10 +51,10 @@ function Map({ className, offers, focusCard }: MapProps): JSX.Element {
         map.removeLayer(markerGroup);
       };
     }
-  }, [map, offers, focusCard, cityLocation]);
+  }, [map, offers, focusCard, cityLocation, currrentPageProperty]);
 
   return (
-    <section ref={mapRef} className={`${className} map`}></section>
+    <section ref={mapRef} className={`${className}__map map`}></section>
   );
 }
 

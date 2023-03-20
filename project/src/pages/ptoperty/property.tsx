@@ -8,10 +8,12 @@ import ReviewsItem from '../../components/reviews-item/reviews-item';
 import { Offers } from '../../types/cards';
 import { ReviewsList } from '../../types/reviews';
 import { changeInPercent, capitalize } from '../../utils/utils';
-import { SIMILAR_AD_COUNT } from '../../consts';
+import { SIMILAR_AD_COUNT, SIMILAR_OFFERS_COUNT } from '../../consts';
 import ReviewForm from '../../components/review-form/review-form';
 import { AppRoute } from '../../consts';
 import Premium from '../../components/premium/premium';
+import Map from '../../components/map/map';
+import CitiesCard from '../../components/cities-card/cities-card';
 
 type PropertyProps = {
   offers: Offers;
@@ -21,6 +23,8 @@ type PropertyProps = {
 function Property({ offers, reviews }: PropertyProps): JSX.Element {
   const { id } = useParams();
   const [property] = offers.filter((offer) => String(offer.id) === String(id));
+  const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_OFFERS_COUNT);
+
 
   if (property === undefined) {
     return <Navigate to={AppRoute.PageNotFound} />;
@@ -137,92 +141,20 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map className={'property'} offers={offers} currrentPageProperty={property.id} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <article className="near-places__card place-card">
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link to="#todo">
-                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place" />
-                  </Link>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;80</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{ width: '80%' }}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <Link to="#todo">Wood and stone place</Link>
-                  </h2>
-                  <p className="place-card__type">Private room</p>
-                </div>
-              </article>
+              {
+                Array.isArray(similarOffers)
+                && similarOffers.length > 0
+                && similarOffers.map((similarOffer) => (
+                  <CitiesCard key={similarOffer.id} className={'near-places'} offer={similarOffer} />
+                ))
+              }
 
-              <article className="near-places__card place-card">
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link to="#todo">
-                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place" />
-                  </Link>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;132</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{ width: '80%' }}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <Link to="#todo">Canal View Prinsengracht</Link>
-                  </h2>
-                  <p className="place-card__type">Apartment</p>
-                </div>
-              </article>
-
-              <article className="near-places__card place-card">
-                <div className="place-card__mark">
-                  <span>Premium</span>
-                </div>
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link to="#todo">
-                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place" />
-                  </Link>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;180</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{ width: '100%' }}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <Link to="#todo">Nice, cozy, warm big bed apartment</Link>
-                  </h2>
-                  <p className="place-card__type">Apartment</p>
-                </div>
-              </article>
             </div>
           </section>
         </div>

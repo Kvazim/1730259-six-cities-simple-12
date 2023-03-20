@@ -26,13 +26,13 @@ function Cities({ offers }: CitiesProp): JSX.Element {
             <div className="cities__places-list places__list tabs__content">
               {
                 offers.map((offer) => (
-                  <CitiesCard key={offer.id} offer={offer} onFocusCard={setFocusCard} />
+                  <CitiesCard key={offer.id} className={'cities'} offer={offer} onFocusCard={setFocusCard} />
                 ))
               }
             </div>
           </section>
           <div className="cities__right-section">
-            <Map className={'cities__map'} offers={offers} focusCard={focusCard} />
+            <Map className={'cities'} offers={offers} focusCard={focusCard} />
           </div>
         </div>
       </div>

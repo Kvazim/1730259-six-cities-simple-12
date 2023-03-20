@@ -1,11 +1,11 @@
 import RatingStars from '../rating-stars/rating-stars';
-import { stars } from '../../consts';
+import { stars, STAR_NAME } from '../../consts';
 import { ChangeEvent, useState } from 'react';
 
 function ReviewForm(): JSX.Element {
   const [isChecked, setIsChecked] = useState('0');
   const onChangeChecked = ({target}: ChangeEvent<HTMLInputElement>) => {
-    if (target.name === 'rating') {
+    if (target.name === STAR_NAME) {
       setIsChecked(target.value);
     }
   };
