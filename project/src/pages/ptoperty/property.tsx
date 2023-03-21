@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import PropertyDescription from '../../components/property-description/property-description';
 import PropertyInside from '../../components/property-inside/property-inside';
@@ -151,7 +151,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
                 Array.isArray(similarOffers)
                 && similarOffers.length > 0
                 && similarOffers.map((similarOffer) => (
-                  <CitiesCard key={similarOffer.id} className={'near-places'} offer={similarOffer} />
+                  <CitiesCard key={similarOffer.id} className={'near-places'} offer={similarOffer} onFocusCard={()=> null} />
                 ))
               }
 
