@@ -48,3 +48,7 @@ export const URL_MARKER_CURRENT =
   '/img/pin-active.svg';
 
 export const SIMILAR_AD_COUNT = 10;
+
+export const SIMILAR_AD_OFFERS_COUNT = 3;
+
+export const STAR_NAME = 'rating';

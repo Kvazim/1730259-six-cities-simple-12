@@ -1,14 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import Header from '../../components/header/header';
 
 function Login(): JSX.Element {
   return (
-    <div className="page page--gray page--login">
+    <>
       <Helmet>
-        <title>six cities simple. Страница входа</title>
+        <title>six cities simple: authorization</title>
       </Helmet>
-      <Header />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">
@@ -35,7 +33,7 @@ function Login(): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

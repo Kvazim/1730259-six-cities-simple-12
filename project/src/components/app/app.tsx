@@ -7,6 +7,7 @@ import Property from '../../pages/ptoperty/property';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import { Offers } from '../../types/cards';
 import { ReviewsList } from '../../types/reviews';
+import Layout from '../layout/layout';
 
 type AppProps = {
   offers: Offers;
@@ -18,11 +19,12 @@ function App({ offers, reviews }: AppProps): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Root} />
-          <Route index element={<Main offers={offers} />} />
-          <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={`${AppRoute.Offer}:id`} element={<Property offers={offers} reviews={reviews} />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path={AppRoute.Root} element={<Layout />}>
+            <Route index element={<Main offers={offers} />} />
+            <Route path={AppRoute.Login} element={<Login />} />
+            <Route path={`${AppRoute.Offer}:id`} element={<Property offers={offers} reviews={reviews} />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
