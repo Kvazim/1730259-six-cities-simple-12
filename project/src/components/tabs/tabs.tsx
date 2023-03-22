@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import TabsItem from '../tabs-item/tabs-item';
+import { CITIES, DEFAULT_LOCATION } from '../../consts';
 
-type TabsProps = {
-  cities: string[];
-}
-
-function Tabs({cities}: TabsProps): JSX.Element {
-  const [currentTabs, setCurrentTabs] = useState(cities[3]);
+function Tabs(): JSX.Element {
+  const [currentTabs, setCurrentTabs] = useState(DEFAULT_LOCATION);
   const onClickTabsItem = (city: string) => setCurrentTabs(city);
 
   return (
@@ -14,7 +11,7 @@ function Tabs({cities}: TabsProps): JSX.Element {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {
-            cities && cities.length > 0 && cities.map((city, index) => (
+            CITIES && CITIES.length > 0 && CITIES.map((city, index) => (
               <TabsItem
                 key={String(city) + String(index)}
                 city={city}

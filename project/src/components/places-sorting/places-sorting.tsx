@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import PlacesOptionsItem from '../places-options-item/places-options-item';
+import { sortType, DEFAULT_SORT } from '../../consts';
 
-type PlacesSortingProps = {
-  placesOption: string[];
-}
-
-function PlacesSorting({placesOption}: PlacesSortingProps): JSX.Element {
+function PlacesSorting(): JSX.Element {
   const [isOpenSorting, setIsOpenSorting] = useState(false);
-  const [isActiveElement, setIsActiveElement] = useState(placesOption[1]);
+  const [isActiveElement, setIsActiveElement] = useState(DEFAULT_SORT);
   const onClickOpen = () => setIsOpenSorting(!isOpenSorting);
   const onClickElement = (item: string) => setIsActiveElement(item);
 
@@ -21,14 +18,16 @@ function PlacesSorting({placesOption}: PlacesSortingProps): JSX.Element {
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOpenSorting ? 'places__options--opened' : ''}`}>
-        {placesOption && placesOption.length > 0 && placesOption.map((item, index) => (
-          <PlacesOptionsItem
-            key={String(item) + String(index)}
-            element={item}
-            isActiveElement={isActiveElement === item}
-            changeCurrentOptions={onClickElement}
-          />
-        ))}
+        {
+          sortType && sortType.length > 0 && sortType.map((item, index) => (
+            <PlacesOptionsItem
+              key={String(item) + String(index)}
+              element={item}
+              isActiveElement={isActiveElement === item}
+              changeCurrentOptions={onClickElement}
+            />
+          ))
+        }
       </ul>
     </form >
   );

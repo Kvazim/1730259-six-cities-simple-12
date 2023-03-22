@@ -11,7 +11,7 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const cities = [
+export const CITIES = [
   'Paris',
   'Cologne',
   'Brussels',
@@ -20,12 +20,16 @@ export const cities = [
   'Dusseldorf',
 ];
 
-export const placesOption = [
+export const DEFAULT_LOCATION = CITIES[3];
+
+export const sortType = [
   'Popular',
   'Price: low to high',
   'Price: high to low',
   'Top rated first',
 ];
+
+export const DEFAULT_SORT = sortType[0];
 
 export const stars = [
   'perfect',
