@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { Navigate, useParams } from 'react-router-dom';
-import Header from '../../components/header/header';
 import PropertyDescription from '../../components/property-description/property-description';
 import PropertyInside from '../../components/property-inside/property-inside';
 import PropertyPhoto from '../../components/property-photo/property-photo';
@@ -34,11 +33,10 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
   const [{ review }] = reviews.filter((items) => String(items.id) === String(id)).map((element) => ({ review: element.review }));
 
   return (
-    <div className="page">
+    <>
       <Helmet>
         <title>six cities simple. Страница предложения</title>
       </Helmet>
-      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">
@@ -159,7 +157,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 
