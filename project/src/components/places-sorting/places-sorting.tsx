@@ -21,7 +21,7 @@ function PlacesSorting({placesOption}: PlacesSortingProps): JSX.Element {
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOpenSorting ? 'places__options--opened' : ''}`}>
-        {Array.isArray(placesOption) && placesOption.length > 0 && placesOption.map((item, index) => (
+        {placesOption && placesOption.length > 0 && placesOption.map((item, index) => (
           <PlacesOptionsItem
             key={String(item) + String(index)}
             element={item}
