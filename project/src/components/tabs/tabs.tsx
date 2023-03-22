@@ -14,7 +14,7 @@ function Tabs({cities}: TabsProps): JSX.Element {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {
-            Array.isArray(cities) && cities.length > 0 && cities.map((city, index) => (
+            cities && cities.length > 0 && cities.map((city, index) => (
               <TabsItem
                 key={String(city) + String(index)}
                 city={city}

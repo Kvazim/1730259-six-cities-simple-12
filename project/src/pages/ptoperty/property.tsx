@@ -7,7 +7,7 @@ import ReviewsItem from '../../components/reviews-item/reviews-item';
 import { Offers } from '../../types/cards';
 import { ReviewsList } from '../../types/reviews';
 import { changeInPercent, capitalize } from '../../utils/utils';
-import { SIMILAR_AD_COUNT, SIMILAR_OFFERS_COUNT } from '../../consts';
+import { SIMILAR_AD_COUNT, SIMILAR_AD_OFFERS_COUNT } from '../../consts';
 import ReviewForm from '../../components/review-form/review-form';
 import { AppRoute } from '../../consts';
 import Premium from '../../components/premium/premium';
@@ -22,7 +22,7 @@ type PropertyProps = {
 function Property({ offers, reviews }: PropertyProps): JSX.Element {
   const { id } = useParams();
   const [property] = offers.filter((offer) => String(offer.id) === String(id));
-  const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_OFFERS_COUNT);
+  const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
 
 
   if (property === undefined) {
@@ -35,7 +35,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
   return (
     <>
       <Helmet>
-        <title>six cities simple. Страница предложения</title>
+        <title>six cities simple: property</title>
       </Helmet>
 
       <main className="page__main page__main--property">
@@ -84,8 +84,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   {
-                    Array.isArray(goods) && goods.length > 0 &&
-                    goods.map((good, index) => (
+                    goods && goods.length > 0 && goods.map((good, index) => (
                       <PropertyInside key={String(index) + String(good)} good={good} />
                     ))
                   }
@@ -125,7 +124,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{review.length}</span></h2>
                 <ul className="reviews__list">
                   {
-                    Array.isArray(review)
+                    review
                     &&
                     review.length > 0
                     &&
@@ -146,7 +145,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {
-                Array.isArray(similarOffers)
+                similarOffers
                 && similarOffers.length > 0
                 && similarOffers.map((similarOffer) => (
                   <CitiesCard key={similarOffer.id} className={'near-places'} offer={similarOffer} onFocusCard={()=> null} />

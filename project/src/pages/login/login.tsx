@@ -5,7 +5,7 @@ function Login(): JSX.Element {
   return (
     <>
       <Helmet>
-        <title>six cities simple. Страница входа</title>
+        <title>six cities simple: authorization</title>
       </Helmet>
 
       <main className="page__main page__main--login">

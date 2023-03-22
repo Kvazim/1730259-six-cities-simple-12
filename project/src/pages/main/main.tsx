@@ -11,11 +11,11 @@ function Main({ offers }: MainScreenProps): JSX.Element {
   return (
     <>
       <Helmet>
-        <title>six cities simple. Main page</title>
+        <title>six cities simple</title>
       </Helmet>
 
       {
-        Array.isArray(offers) && offers.length > 0
+        offers && offers.length > 0
           ?
           <Cities offers={offers} />
           :
