@@ -8,7 +8,8 @@ function Layout():JSX.Element {
   return (
     <div className={
       cn('page',
-        {'page page--gray page--main': pathname === AppRoute.Root},
+        {'page--gray page--main': pathname === AppRoute.Root},
+        {'page--gray page--login': pathname === AppRoute.Login},
       )
     }
     >
