@@ -20,7 +20,7 @@ export const CITIES = [
   'Dusseldorf',
 ];
 
-export const DEFAULT_LOCATION = CITIES[3];
+export const DEFAULT_CITIES = CITIES[0];
 
 export const sortType = [
   'Popular',

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import TabsItem from '../tabs-item/tabs-item';
-import { CITIES, DEFAULT_LOCATION } from '../../consts';
+import { CITIES, DEFAULT_CITIES } from '../../consts';
 
 function Tabs(): JSX.Element {
-  const [currentTabs, setCurrentTabs] = useState(DEFAULT_LOCATION);
+  const [currentTabs, setCurrentTabs] = useState(DEFAULT_CITIES);
   const onClickTabsItem = (city: string) => setCurrentTabs(city);
 
   return (
