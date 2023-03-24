@@ -1,14 +1,16 @@
 import { Helmet } from 'react-helmet-async';
 import Cities from '../../components/cities/cities';
 import Tabs from '../../components/tabs/tabs';
-import { Offers } from '../../types/cards';
 import CitiesEmpty from '../cities-empty/cities-empty';
+import { useAppSelector } from '../../hooks';
+import { getSortingCurrentOffers } from '../../utils/utils';
 
-type MainScreenProps = {
-  offers: Offers;
-}
+function Main(): JSX.Element {
+  const location = useAppSelector((state) => state.city);
+  const offersState = useAppSelector((state) => state.offers);
+  const sortType = useAppSelector((state) => state.sortType);
+  const offers = getSortingCurrentOffers(location, offersState, sortType);
 
-function Main({ offers }: MainScreenProps): JSX.Element {
   return (
     <main className={`page__main page__main--index ${offers.length < 1 ? 'page__main--index-empty' : '' }`}>
       <Helmet>

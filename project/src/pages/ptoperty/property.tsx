@@ -4,7 +4,6 @@ import PropertyDescription from '../../components/property-description/property-
 import PropertyInside from '../../components/property-inside/property-inside';
 import PropertyPhoto from '../../components/property-photo/property-photo';
 import ReviewsItem from '../../components/reviews-item/reviews-item';
-import { Offers } from '../../types/cards';
 import { ReviewsList } from '../../types/reviews';
 import { changeInPercent, capitalize } from '../../utils/utils';
 import { SIMILAR_AD_COUNT, SIMILAR_AD_OFFERS_COUNT } from '../../consts';
@@ -13,14 +12,17 @@ import { AppRoute } from '../../consts';
 import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
 import CitiesCard from '../../components/cities-card/cities-card';
+// import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../hooks';
 
 type PropertyProps = {
-  offers: Offers;
   reviews: ReviewsList;
 }
 
-function Property({ offers, reviews }: PropertyProps): JSX.Element {
+function Property({ reviews }: PropertyProps): JSX.Element {
   const { id } = useParams();
+  // const dispatch = useDispatch();
+  const offers = useAppSelector((state) => state.offers);
   const [property] = offers.filter((offer) => String(offer.id) === String(id));
   const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
 

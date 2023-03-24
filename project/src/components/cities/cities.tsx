@@ -3,6 +3,7 @@ import CitiesCard from '../cities-card/cities-card';
 import { Offer, Offers } from '../../types/cards';
 import PlacesSorting from '../places-sorting/places-sorting';
 import Map from '../map/map';
+import { useAppSelector } from '../../hooks';
 
 type CitiesProp = {
   offers: Offers;
@@ -10,12 +11,13 @@ type CitiesProp = {
 
 function Cities({ offers }: CitiesProp): JSX.Element {
   const [focusCard, setFocusCard] = useState<Offer | null>(null);
+  const location = useAppSelector((state) => state.city);
 
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+        <b className="places__found">{offers.length} places to stay in {location}</b>
         <PlacesSorting />
         <div className="cities__places-list places__list tabs__content">
           {
