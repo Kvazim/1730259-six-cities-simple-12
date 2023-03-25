@@ -222,15 +222,15 @@ export const offers: Offers = [
     },
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 48.856663,
+        longitude: 2.351556,
         zoom: 10,
       },
       name: 'Paris'
     },
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.826663,
+      longitude: 2.321556,
       zoom: 16,
     },
   },
@@ -271,15 +271,15 @@ export const offers: Offers = [
     },
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 48.856663,
+        longitude: 2.351556,
         zoom: 10,
       },
       name: 'Paris'
     },
     location: {
-      latitude: 52.3609553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.886663,
+      longitude: 2.381556,
       zoom: 16,
     },
   },
@@ -317,15 +317,15 @@ export const offers: Offers = [
     },
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 48.856663,
+        longitude: 2.351556,
         zoom: 10,
       },
       name: 'Paris',
     },
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.929309666406198,
+      latitude: 48.846663,
+      longitude: 2.341556,
       zoom: 16,
     },
   },
@@ -363,15 +363,15 @@ export const offers: Offers = [
     },
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 48.856663,
+        longitude: 2.351556,
         zoom: 10,
       },
       name: 'Paris',
     },
     location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406198,
+      latitude: 48.866663,
+      longitude: 2.361556,
       zoom: 16,
     },
   },

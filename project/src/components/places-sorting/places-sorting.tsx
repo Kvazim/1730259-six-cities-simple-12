@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { SortType } from '../../consts';
 import { useAppSelector } from '../../hooks';
@@ -6,7 +6,6 @@ import cn from 'classnames';
 import { changeSort } from '../../store/action';
 
 function PlacesSorting(): JSX.Element {
-  const sortingRef = useRef(null);
   const [isOpenSorting, setIsOpenSorting] = useState(false);
   const onClickOpen = () => setIsOpenSorting(!isOpenSorting);
   const dispatch = useDispatch();
@@ -24,7 +23,7 @@ function PlacesSorting(): JSX.Element {
       <ul className={`places__options places__options--custom ${isOpenSorting ? 'places__options--opened' : ''}`}>
         {
           Object.entries(SortType).map(([, value]) => (
-            <li ref={sortingRef} key={value}
+            <li key={value}
               className={
                 cn(
                   'places__option',

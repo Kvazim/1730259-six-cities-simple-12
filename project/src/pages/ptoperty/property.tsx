@@ -12,7 +12,6 @@ import { AppRoute } from '../../consts';
 import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
 import CitiesCard from '../../components/cities-card/cities-card';
-// import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../hooks';
 
 type PropertyProps = {
@@ -21,7 +20,6 @@ type PropertyProps = {
 
 function Property({ reviews }: PropertyProps): JSX.Element {
   const { id } = useParams();
-  // const dispatch = useDispatch();
   const offers = useAppSelector((state) => state.offers);
   const [property] = offers.filter((offer) => String(offer.id) === String(id));
   const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
@@ -150,7 +148,7 @@ function Property({ reviews }: PropertyProps): JSX.Element {
                 similarOffers
                 && similarOffers.length > 0
                 && similarOffers.map((similarOffer) => (
-                  <CitiesCard key={similarOffer.id} className={'near-places'} offer={similarOffer} onFocusCard={()=> null} />
+                  <CitiesCard key={similarOffer.id} className={'near-places'} offer={similarOffer} />
                 ))
               }
 
