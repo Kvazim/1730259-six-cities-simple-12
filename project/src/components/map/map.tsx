@@ -31,6 +31,7 @@ function Map({ className, offers, focusCard, currrentPageProperty }: MapProps): 
 
   useEffect(() => {
     if (map) {
+      map.flyTo([cityLocation.latitude, cityLocation.longitude], cityLocation.zoom);
       const markerGroup = leaflet.layerGroup().addTo(map);
       offers.forEach((offer) => {
         const marker = leaflet.marker({
