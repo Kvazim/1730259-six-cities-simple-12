@@ -26,7 +26,7 @@ function Property({ reviews }: PropertyProps): JSX.Element {
 
 
   if (property === undefined) {
-    return <Navigate to={AppRoute.PageNotFound} />;
+    return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
   const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;
