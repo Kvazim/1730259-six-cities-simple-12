@@ -9,7 +9,7 @@ type MapProps = {
   offers: Offers;
   focusCard?: Offer | null;
   className: string;
-  currrentPageProperty?: number;
+  currrentPageProperty?: Offer;
 }
 
 const defaultCustomIcon = leaflet.icon({
@@ -40,7 +40,7 @@ function Map({ className, offers, focusCard, currrentPageProperty }: MapProps): 
 
         marker
           .setIcon(
-            focusCard !== null && (focusCard === offer || currrentPageProperty === offer.id)
+            focusCard !== null && (focusCard === offer || currrentPageProperty === offer)
               ? currentCustomIcon
               : defaultCustomIcon
           )

@@ -6,14 +6,22 @@ import Premium from '../premium/premium';
 
 type CitiesCardProp = {
   offer: Offer;
-  onFocusCard?: (onFocusCard: Offer | null) => void;
+  onFocusCard?: (offer: Offer | null) => void;
   className: string;
 }
 
 function CitiesCard({ offer, onFocusCard, className }: CitiesCardProp): JSX.Element {
   const { isPremium, previewImage, price, title, type, id, rating } = offer;
   return (
-    <article className={`${className}__card place-card`} onMouseEnter={() => onFocusCard?.(offer)}>
+    <article
+      className={`${className}__card place-card`}
+      onMouseEnter={
+        onFocusCard && (() => onFocusCard(offer))
+      }
+      onMouseLeave={
+        onFocusCard && (() => onFocusCard(null))
+      }
+    >
       { isPremium && <Premium className={'place-card__mark'} /> }
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}${id}`}>
