@@ -1,34 +1,42 @@
 import { useState } from 'react';
-import PlacesOptionsItem from '../places-options-item/places-options-item';
+import { useDispatch } from 'react-redux';
+import { SortType } from '../../consts';
+import { useAppSelector } from '../../hooks';
+import cn from 'classnames';
+import { changeSort } from '../../store/action';
 
-type PlacesSortingProps = {
-  placesOption: string[];
-}
-
-function PlacesSorting({placesOption}: PlacesSortingProps): JSX.Element {
+function PlacesSorting(): JSX.Element {
   const [isOpenSorting, setIsOpenSorting] = useState(false);
-  const [isActiveElement, setIsActiveElement] = useState(placesOption[1]);
   const onClickOpen = () => setIsOpenSorting(!isOpenSorting);
-  const onClickElement = (item: string) => setIsActiveElement(item);
+  const dispatch = useDispatch();
+  const sortType = useAppSelector((state) => state.sortType);
 
   return (
     <form className="places__sorting" action="#" method="get" onClick={onClickOpen}>
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0}>
-        {isActiveElement}
+        {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOpenSorting ? 'places__options--opened' : ''}`}>
-        {placesOption && placesOption.length > 0 && placesOption.map((item, index) => (
-          <PlacesOptionsItem
-            key={String(item) + String(index)}
-            element={item}
-            isActiveElement={isActiveElement === item}
-            changeCurrentOptions={onClickElement}
-          />
-        ))}
+        {
+          Object.entries(SortType).map(([, value]) => (
+            <li key={value}
+              className={
+                cn(
+                  'places__option',
+                  { 'places__option--active': sortType === value }
+                )
+              }
+              tabIndex={0}
+              onClick={() => dispatch(changeSort(value))}
+            >
+              {value}
+            </li>
+          ))
+        }
       </ul>
     </form >
   );

@@ -4,7 +4,6 @@ import PropertyDescription from '../../components/property-description/property-
 import PropertyInside from '../../components/property-inside/property-inside';
 import PropertyPhoto from '../../components/property-photo/property-photo';
 import ReviewsItem from '../../components/reviews-item/reviews-item';
-import { Offers } from '../../types/cards';
 import { ReviewsList } from '../../types/reviews';
 import { changeInPercent, capitalize } from '../../utils/utils';
 import { SIMILAR_AD_COUNT, SIMILAR_AD_OFFERS_COUNT } from '../../consts';
@@ -13,20 +12,20 @@ import { AppRoute } from '../../consts';
 import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
 import CitiesCard from '../../components/cities-card/cities-card';
+import { useAppSelector } from '../../hooks';
 
 type PropertyProps = {
-  offers: Offers;
   reviews: ReviewsList;
 }
 
-function Property({ offers, reviews }: PropertyProps): JSX.Element {
+function Property({ reviews }: PropertyProps): JSX.Element {
   const { id } = useParams();
-  const [property] = offers.filter((offer) => String(offer.id) === String(id));
+  const offers = useAppSelector((state) => state.offers);
+  const property = offers.find((offer) => String(offer.id) === String(id));
   const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
 
-
   if (property === undefined) {
-    return <Navigate to={AppRoute.PageNotFound} />;
+    return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
   const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;
@@ -138,7 +137,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
               </section>
             </div>
           </div>
-          <Map className={'property'} offers={offers} currrentPageProperty={property.id} />
+          <Map className={'property'} offers={offers} currrentPageProperty={property} />
         </section>
         <div className="container">
           <section className="near-places places">
@@ -148,7 +147,7 @@ function Property({ offers, reviews }: PropertyProps): JSX.Element {
                 similarOffers
                 && similarOffers.length > 0
                 && similarOffers.map((similarOffer) => (
-                  <CitiesCard key={similarOffer.id} className={'near-places'} offer={similarOffer} onFocusCard={()=> null} />
+                  <CitiesCard key={similarOffer.id} className={'near-places'} offer={similarOffer} />
                 ))
               }
 
