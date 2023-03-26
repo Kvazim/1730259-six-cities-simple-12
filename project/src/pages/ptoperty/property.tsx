@@ -137,7 +137,7 @@ function Property({ reviews }: PropertyProps): JSX.Element {
               </section>
             </div>
           </div>
-          <Map className={'property'} offers={offers.concat(property)} currrentPageProperty={property} />
+          <Map className={'property'} offers={offers} currrentPageProperty={property} />
         </section>
         <div className="container">
           <section className="near-places places">
