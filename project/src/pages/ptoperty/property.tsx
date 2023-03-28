@@ -21,6 +21,7 @@ type PropertyProps = {
 function Property({ reviews }: PropertyProps): JSX.Element {
   const { id } = useParams();
   const offers = useAppSelector((state) => state.offers);
+  const location = useAppSelector((state) => state.city);
   const property = offers.find((offer) => String(offer.id) === String(id));
   const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
 
@@ -137,7 +138,7 @@ function Property({ reviews }: PropertyProps): JSX.Element {
               </section>
             </div>
           </div>
-          <Map className={'property'} offers={offers} currrentPageProperty={property} />
+          <Map className={'property'} offers={offers} currrentPageProperty={property} location={location} />
         </section>
         <div className="container">
           <section className="near-places places">
