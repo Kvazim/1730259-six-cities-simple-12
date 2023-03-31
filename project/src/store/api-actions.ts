@@ -1,9 +1,9 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { Offers } from '../types/cards';
+import { OfferId, Offers, Offer } from '../types/cards';
 import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../consts';
-import { getUserData, loadOffers, redirectToRoute, requireAuthorization, setDataLoadingStatus, setError } from './action';
+import { getUserData, loadOfferId, loadOffers, redirectToRoute, requireAuthorization, setDataLoadingStatus, setError } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
@@ -30,6 +30,25 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     const { data } = await api.get<Offers>(APIRoute.Offers);
     dispatch(setDataLoadingStatus(false));
     dispatch(loadOffers(data));
+  },
+);
+
+export const fetchOfferIdAction = createAsyncThunk<void, OfferId, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/loadOfferId',
+  async (offerId, {dispatch, extra: api}) => {
+    dispatch(setDataLoadingStatus(true));
+    try {
+      const {data} = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
+      dispatch(loadOfferId(data));
+      dispatch(setDataLoadingStatus(false));
+    } catch {
+      dispatch(redirectToRoute(AppRoute.Root));
+      dispatch(setDataLoadingStatus(false));
+    }
   },
 );
 
@@ -76,3 +95,4 @@ export const logOutAction = createAsyncThunk<void, undefined, {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
+

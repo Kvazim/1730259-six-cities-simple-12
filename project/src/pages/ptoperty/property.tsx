@@ -12,19 +12,40 @@ import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
 // import CitiesCard from '../../components/cities-card/cities-card';
 import { useAppSelector } from '../../hooks';
+import { store } from '../../store';
+import { fetchOfferIdAction } from '../../store/api-actions';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 function Property(): JSX.Element {
   const { id } = useParams();
+  const offerId = Number(id);
+  const dispatch = useDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const offers = useAppSelector((state) => state.offers);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted) {
+      store.dispatch(fetchOfferIdAction(offerId));
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, offerId]);
+
+  const property = useAppSelector((state) => state.offerId);
+  console.log(property);
+  // const offers = useAppSelector((state) => state.offers);
   const location = useAppSelector((state) => state.city);
-  const property = offers.find((offer) => String(offer.id) === String(id));
+  // const property = offers.find((offer) => String(offer.id) === String(id));
   // const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
   if (property === undefined) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
-  const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;
+  // const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;
   // const [{ review }] = reviews.filter((items) => String(items.id) === String(id)).map((element) => ({ review: element.review }));
 
   return (

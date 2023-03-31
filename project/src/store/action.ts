@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { AuthorizationStatus, SortType, AppRoute } from '../consts';
-import { Offers } from '../types/cards';
+import { Offers, Offer } from '../types/cards';
 import { UserData } from '../types/user-data';
 
 export const changeCity = createAction(
@@ -15,6 +15,10 @@ export const changeSort = createAction(
 
 export const loadOffers = createAction<Offers>(
   'data/loadOffers'
+);
+
+export const loadOfferId = createAction<Offer>(
+  'data/loadOfferId'
 );
 
 export const requireAuthorization = createAction<AuthorizationStatus>(
