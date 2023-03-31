@@ -3,34 +3,29 @@ import { Navigate, useParams } from 'react-router-dom';
 import PropertyDescription from '../../components/property-description/property-description';
 import PropertyInside from '../../components/property-inside/property-inside';
 import PropertyPhoto from '../../components/property-photo/property-photo';
-import ReviewsItem from '../../components/reviews-item/reviews-item';
-import { ReviewsList } from '../../types/reviews';
+// import ReviewsItem from '../../components/reviews-item/reviews-item';
 import { changeInPercent, capitalize } from '../../utils/utils';
-import { SIMILAR_AD_COUNT, SIMILAR_AD_OFFERS_COUNT } from '../../consts';
+// import { SIMILAR_AD_COUNT, SIMILAR_AD_OFFERS_COUNT } from '../../consts';
 import ReviewForm from '../../components/review-form/review-form';
 import { AppRoute } from '../../consts';
 import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
-import CitiesCard from '../../components/cities-card/cities-card';
+// import CitiesCard from '../../components/cities-card/cities-card';
 import { useAppSelector } from '../../hooks';
 
-type PropertyProps = {
-  reviews: ReviewsList;
-}
-
-function Property({ reviews }: PropertyProps): JSX.Element {
+function Property(): JSX.Element {
   const { id } = useParams();
   const offers = useAppSelector((state) => state.offers);
   const location = useAppSelector((state) => state.city);
   const property = offers.find((offer) => String(offer.id) === String(id));
-  const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
+  // const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
 
   if (property === undefined) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
   const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;
-  const [{ review }] = reviews.filter((items) => String(items.id) === String(id)).map((element) => ({ review: element.review }));
+  // const [{ review }] = reviews.filter((items) => String(items.id) === String(id)).map((element) => ({ review: element.review }));
 
   return (
     <>
@@ -121,8 +116,8 @@ function Property({ reviews }: PropertyProps): JSX.Element {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{review.length}</span></h2>
-                <ul className="reviews__list">
+                {/* <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{review.length}</span></h2> */}
+                {/* <ul className="reviews__list">
                   {
                     review
                     &&
@@ -133,7 +128,7 @@ function Property({ reviews }: PropertyProps): JSX.Element {
                       .slice(0, SIMILAR_AD_COUNT)
                       .map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
                   }
-                </ul>
+                </ul> */}
                 <ReviewForm />
               </section>
             </div>
@@ -143,7 +138,7 @@ function Property({ reviews }: PropertyProps): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
+            {/* <div className="near-places__list places__list">
               {
                 similarOffers
                 && similarOffers.length > 0
@@ -152,7 +147,7 @@ function Property({ reviews }: PropertyProps): JSX.Element {
                 ))
               }
 
-            </div>
+            </div> */}
           </section>
         </div>
       </main>

@@ -5,6 +5,13 @@ export enum AppRoute {
   PageNotFound = '/404',
 }
 
+export enum APIRoute {
+  Offers = '/hotels',
+  Reviews = '/comments',
+  Login = '/login',
+  Logout = '/logout'
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -56,3 +63,7 @@ export const SIMILAR_AD_COUNT = 10;
 export const SIMILAR_AD_OFFERS_COUNT = 3;
 
 export const STAR_NAME = 'rating';
+
+export const BASE_URL = 'https://12.react.pages.academy/six-cities-simple';
+
+export const REQUEST_TIMEOUT = 5000;
