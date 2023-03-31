@@ -7,7 +7,7 @@ import PropertyPhoto from '../../components/property-photo/property-photo';
 import { changeInPercent, capitalize } from '../../utils/utils';
 // import { SIMILAR_AD_COUNT, SIMILAR_AD_OFFERS_COUNT } from '../../consts';
 import ReviewForm from '../../components/review-form/review-form';
-import { AppRoute } from '../../consts';
+import { AppRoute, AuthorizationStatus } from '../../consts';
 import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
 // import CitiesCard from '../../components/cities-card/cities-card';
@@ -15,11 +15,11 @@ import { useAppSelector } from '../../hooks';
 
 function Property(): JSX.Element {
   const { id } = useParams();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const offers = useAppSelector((state) => state.offers);
   const location = useAppSelector((state) => state.city);
   const property = offers.find((offer) => String(offer.id) === String(id));
   // const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
-
   if (property === undefined) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
@@ -129,7 +129,13 @@ function Property(): JSX.Element {
                       .map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
                   }
                 </ul> */}
-                <ReviewForm />
+                {
+                  authorizationStatus === AuthorizationStatus.Auth
+                    ?
+                    <ReviewForm />
+                    :
+                    null
+                }
               </section>
             </div>
           </div>
