@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../consts';
+import { useAppSelector } from '../../hooks';
 
-type NavigateProps = {
-  authorizationStatus: AuthorizationStatus;
-}
+function UserNav(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-function UserNav(props: NavigateProps): JSX.Element {
-  const {authorizationStatus} = props;
   return (
     authorizationStatus === AuthorizationStatus.Auth
       ?
@@ -19,7 +17,7 @@ function UserNav(props: NavigateProps): JSX.Element {
             </div>
           </li>
           <li className="header__nav-item">
-            <Link className="header__nav-link" to="#todo">
+            <Link className="header__nav-link" to="/" >
               <span className="header__signout">Sign out</span>
             </Link>
           </li>

@@ -1,30 +1,37 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute } from '../../consts';
+import { AppRoute, AuthorizationStatus } from '../../consts';
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
 import Property from '../../pages/ptoperty/property';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
-import { ReviewsList } from '../../types/reviews';
 import Layout from '../layout/layout';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
-type AppProps = {
-  reviews: ReviewsList;
-};
+function App(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isDataLoading = useAppSelector((state) => state.isDataLoading);
 
-function App({ reviews }: AppProps): JSX.Element {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route path={AppRoute.Root} element={<Layout />}>
             <Route index element={<Main />} />
             <Route path={AppRoute.Login} element={<Login />} />
-            <Route path={`${AppRoute.Offer}:id`} element={<Property reviews={reviews} />} />
+            <Route path={`${AppRoute.Offer}:id`} element={<Property />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
