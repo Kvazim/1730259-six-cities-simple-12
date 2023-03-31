@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../consts';
 import { useAppSelector } from '../../hooks';
+import { useDispatch } from 'react-redux';
+import { logOutAction } from '../../store/api-actions';
 
 function UserNav(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const userData = useAppSelector((state) => state.userData);
+  const dispatch = useDispatch();
 
   return (
     authorizationStatus === AuthorizationStatus.Auth
@@ -12,12 +16,24 @@ function UserNav(): JSX.Element {
         <ul className="header__nav-list">
           <li className="header__nav-item user">
             <div className="header__nav-profile">
-              <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-              <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+              <div className="header__avatar-wrapper user__avatar-wrapper">
+                <img
+                  src={userData?.avatarUrl ?? './img/avatar.svg'}
+                  alt={userData?.name ?? 'User avatar.'}
+                />
+              </div>
+              <span className="header__user-name user__name">{userData?.email}</span>
             </div>
           </li>
           <li className="header__nav-item">
-            <Link className="header__nav-link" to="/" >
+            <Link
+              className="header__nav-link"
+              onClick={(evt) => {
+                evt.preventDefault();
+                dispatch(logOutAction());
+              }}
+              to="/"
+            >
               <span className="header__signout">Sign out</span>
             </Link>
           </li>
