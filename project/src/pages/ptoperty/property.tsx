@@ -36,18 +36,16 @@ function Property(): JSX.Element {
     };
   }, [dispatch, offerId]);
 
-  // const isDataloading = useAppSelector((state) => state.isDataLoading);
   const property = useAppSelector((state) => state.offerId);
   const isDataloading = useAppSelector((state) => state.isDataLoading);
-  console.log(property);
 
   // const offers = useAppSelector((state) => state.offers);
   // const location = useAppSelector((state) => state.city);
   // const property = offers.find((offer) => String(offer.id) === String(id));
   // const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
-
+  console.log(property);
   if (!property || isDataloading) {
-    return <LoadingScreen />;
+    return (<LoadingScreen />);
   }
 
   if (!property) {
