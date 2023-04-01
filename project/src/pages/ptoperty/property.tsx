@@ -7,15 +7,16 @@ import PropertyPhoto from '../../components/property-photo/property-photo';
 import { changeInPercent, capitalize } from '../../utils/utils';
 // import { SIMILAR_AD_COUNT, SIMILAR_AD_OFFERS_COUNT } from '../../consts';
 import ReviewForm from '../../components/review-form/review-form';
-import { AppRoute, AuthorizationStatus } from '../../consts';
+import { AppRoute, AuthorizationStatus, MAX_IMAGES_OFFER } from '../../consts';
 import Premium from '../../components/premium/premium';
-import Map from '../../components/map/map';
+// import Map from '../../components/map/map';
 // import CitiesCard from '../../components/cities-card/cities-card';
 import { useAppSelector } from '../../hooks';
 import { store } from '../../store';
 import { fetchOfferIdAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function Property(): JSX.Element {
   const { id } = useParams();
@@ -35,13 +36,21 @@ function Property(): JSX.Element {
     };
   }, [dispatch, offerId]);
 
+  // const isDataloading = useAppSelector((state) => state.isDataLoading);
   const property = useAppSelector((state) => state.offerId);
+  const isDataloading = useAppSelector((state) => state.isDataLoading);
   console.log(property);
+
   // const offers = useAppSelector((state) => state.offers);
-  const location = useAppSelector((state) => state.city);
+  // const location = useAppSelector((state) => state.city);
   // const property = offers.find((offer) => String(offer.id) === String(id));
   // const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
-  if (property === undefined) {
+
+  if (!property || isDataloading) {
+    return <LoadingScreen />;
+  }
+
+  if (!property) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
@@ -59,9 +68,11 @@ function Property(): JSX.Element {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {
-                images.map((photoUrl, index) => (
-                  <PropertyPhoto key={String(photoUrl) + String(index)} photoUrl={photoUrl} />
-                ))
+                images
+                  .slice(0, MAX_IMAGES_OFFER)
+                  .map((photoUrl, index) => (
+                    <PropertyPhoto key={String(photoUrl) + String(index)} photoUrl={photoUrl} />
+                  ))
               }
             </div>
           </div>
@@ -160,7 +171,7 @@ function Property(): JSX.Element {
               </section>
             </div>
           </div>
-          <Map className={'property'} offers={offers} currrentPageProperty={property} location={location} />
+          {/* <Map className={'property'} offers={offers} currrentPageProperty={property} location={location} /> */}
         </section>
         <div className="container">
           <section className="near-places places">

@@ -43,11 +43,11 @@ export const fetchOfferIdAction = createAsyncThunk<void, OfferId, {
     dispatch(setDataLoadingStatus(true));
     try {
       const {data} = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
+      dispatch(setDataLoadingStatus(false));
       dispatch(loadOfferId(data));
-      dispatch(setDataLoadingStatus(false));
     } catch {
-      dispatch(redirectToRoute(AppRoute.Root));
       dispatch(setDataLoadingStatus(false));
+      dispatch(redirectToRoute(AppRoute.Root));
     }
   },
 );
