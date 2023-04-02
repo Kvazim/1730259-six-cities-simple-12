@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../consts';
-import { useAppSelector } from '../../hooks';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logOutAction } from '../../store/api-actions';
 
 function UserNav(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const userData = useAppSelector((state) => state.userData);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     authorizationStatus === AuthorizationStatus.Auth

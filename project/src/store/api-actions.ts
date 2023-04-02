@@ -80,6 +80,8 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Root));
+    const {data} = await api.get<UserData>(APIRoute.Login);
+    dispatch(getUserData(data));
   },
 );
 

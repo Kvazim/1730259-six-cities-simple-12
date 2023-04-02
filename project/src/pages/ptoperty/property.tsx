@@ -43,7 +43,7 @@ function Property(): JSX.Element {
   // const location = useAppSelector((state) => state.city);
   // const property = offers.find((offer) => String(offer.id) === String(id));
   // const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
-  console.log(property);
+
   if (!property || isDataloading) {
     return (<LoadingScreen />);
   }
