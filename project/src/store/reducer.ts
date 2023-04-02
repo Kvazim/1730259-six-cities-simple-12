@@ -1,9 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, changeSort, loadOffers, requireAuthorization, setError, setDataLoadingStatus, getUserData, loadOfferId } from './action';
+import { changeCity, changeSort, loadOffers, requireAuthorization, setError, setDataLoadingStatus, getUserData, loadOfferId, loadReviewId, loadNearOffers } from './action';
 import { AuthorizationStatus, DEFAULT_CITIES, DEFAULT_SORT } from '../consts';
 import { Offer, Offers } from '../types/cards';
 import { SortType } from '../consts';
 import { UserData } from '../types/user-data';
+import { Reviews } from '../types/reviews';
 
 type InitialState = {
   city: string;
@@ -14,6 +15,8 @@ type InitialState = {
   isDataLoading: boolean;
   userData: UserData | null;
   offerId: Offer | null;
+  reviewId: Reviews;
+  nearOffers: Offers;
 };
 
 const initialState: InitialState = {
@@ -25,6 +28,8 @@ const initialState: InitialState = {
   isDataLoading: false,
   userData: null,
   offerId: null,
+  reviewId: [],
+  nearOffers: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -37,6 +42,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOfferId, (state, action) => {
       state.offerId = action.payload;
+    })
+    .addCase(loadReviewId, (state, action) => {
+      state.reviewId = action.payload;
+    })
+    .addCase(loadNearOffers, (state, action) => {
+      state.nearOffers = action.payload;
     })
     .addCase(changeSort, (state, action) => {
       state.sortType = action.payload;
