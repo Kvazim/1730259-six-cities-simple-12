@@ -140,7 +140,7 @@ function Property(): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                {/* <ul className="reviews__list">
+                <ul className="reviews__list">
                   {
                     reviews
                     &&
@@ -151,7 +151,7 @@ function Property(): JSX.Element {
                       .slice(0, SIMILAR_AD_COUNT)
                       .map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
                   }
-                </ul> */}
+                </ul>
                 {
                   authorizationStatus === AuthorizationStatus.Auth
                     ?
