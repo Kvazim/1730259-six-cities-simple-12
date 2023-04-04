@@ -1,12 +1,15 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, SyntheticEvent, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
-import { AppRoute } from '../../consts';
+import { AppRoute, CITIES } from '../../consts';
 import { useAppDispatch } from '../../hooks';
+import { getRandomArrayItem } from '../../utils/utils';
+import { changeCity } from '../../store/action';
 
 function Login(): JSX.Element {
+  const [randomCity,] = useState(getRandomArrayItem(CITIES));
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -27,6 +30,12 @@ function Login(): JSX.Element {
       });
       navigate(AppRoute.Root);
     }
+  };
+
+  const onClickRandomCity = (evt: SyntheticEvent<EventTarget>) => {
+    evt.preventDefault();
+    dispatch(changeCity(randomCity as string));
+    navigate(AppRoute.Root, { replace: true });
   };
 
   return (
@@ -67,8 +76,8 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to="#todo">
-                <span>Amsterdam</span>
+              <Link className="locations__item-link" to={AppRoute.Root} onClick={(evt) => onClickRandomCity(evt)}>
+                <span>{randomCity}</span>
               </Link>
             </div>
           </section>

@@ -50,3 +50,11 @@ export const getUserData = createAction(
 export const loadNearOffers = createAction<Offers>(
   'data/loadNearOffers'
 );
+
+export const setReviewLoading = createAction<boolean>(
+  'data/setUserReview'
+);
+
+export const setReview = createAction<Reviews>(
+  'data/setNewReview'
+);

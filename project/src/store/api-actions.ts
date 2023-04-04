@@ -12,13 +12,15 @@ import {
   redirectToRoute,
   requireAuthorization,
   setDataLoadingStatus,
-  setError
+  setError,
+  setReview,
+  setReviewLoading
 } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import { store } from './';
-import { Reviews } from '../types/reviews';
+import { NewReview, Reviews } from '../types/reviews';
 
 export const clearErrorAction = createAsyncThunk(
   'data/clearError',
@@ -70,6 +72,24 @@ export const fetchReviewIdAction = createAsyncThunk<void, OfferId, {
     const {data} = await api.get<Reviews>(`${APIRoute.Reviews}/${offerId}`);
     dispatch(loadReviewId(data));
   },
+);
+
+export const addReviewAction = createAsyncThunk<void, NewReview, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/setNewReview',
+  async ({offerId, comment, rating}, {dispatch, extra: api}) => {
+    try {
+      dispatch(setReviewLoading(true));
+      const {data} = await api.post<Reviews>(`${APIRoute.Reviews}/${offerId}`, {comment, rating});
+      dispatch(setReview(data));
+    }
+    finally {
+      dispatch(setReviewLoading(false));
+    }
+  }
 );
 
 export const fetchNearOffersAction = createAsyncThunk<void, OfferId, {

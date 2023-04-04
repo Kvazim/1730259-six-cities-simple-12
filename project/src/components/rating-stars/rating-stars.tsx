@@ -3,10 +3,11 @@ import { Fragment, ChangeEvent } from 'react';
 type RatingStarsProps = {
   stars: string[];
   isChecked: string;
+  isDisabled: boolean;
   onChangeChecked: ({ target }: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function RatingStars({ stars, onChangeChecked, isChecked }: RatingStarsProps): JSX.Element {
+function RatingStars({ stars, onChangeChecked, isChecked, isDisabled }: RatingStarsProps): JSX.Element {
   return (
     <div className="reviews__rating-form form__rating" onChange={onChangeChecked}>
       {
@@ -19,6 +20,7 @@ function RatingStars({ stars, onChangeChecked, isChecked }: RatingStarsProps): J
               id={`${stars.length - index}-stars`}
               type="radio"
               defaultChecked={isChecked === `${stars.length - index}`}
+              disabled={isDisabled}
             />
             <label htmlFor={`${stars.length - index}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width="37" height="33">

@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, changeSort, loadOffers, requireAuthorization, setError, setDataLoadingStatus, getUserData, loadOfferId, loadReviewId, loadNearOffers } from './action';
+import { changeCity, changeSort, loadOffers, requireAuthorization, setError, setDataLoadingStatus, getUserData, loadOfferId, loadReviewId, loadNearOffers, setReviewLoading } from './action';
 import { AuthorizationStatus, DEFAULT_CITIES, DEFAULT_SORT } from '../consts';
 import { Offer, Offers } from '../types/cards';
 import { SortType } from '../consts';
@@ -17,6 +17,7 @@ type InitialState = {
   offerId: Offer | null;
   reviewId: Reviews;
   nearOffers: Offers;
+  setReviewUserLoading: boolean;
 };
 
 const initialState: InitialState = {
@@ -30,6 +31,7 @@ const initialState: InitialState = {
   offerId: null,
   reviewId: [],
   nearOffers: [],
+  setReviewUserLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -60,6 +62,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setDataLoadingStatus, (state, action) => {
       state.isDataLoading = action.payload;
+    })
+    .addCase(setReviewLoading, (state, action) => {
+      state.setReviewUserLoading = action.payload;
     })
     .addCase(getUserData, (state, action) => {
       state.userData = action.payload;

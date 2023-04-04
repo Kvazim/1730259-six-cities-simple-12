@@ -30,24 +30,13 @@ function Property(): JSX.Element {
   const reviews = useAppSelector((state) => state.reviewId);
   const similarOffers = useAppSelector((state) => state.nearOffers);
   const location = useAppSelector((state) => state.city);
-  // const currentReviewId = useAppSelector((state) => state.reviewId);
-  // const isDataloading = useAppSelector((state) => state.isDataLoading);
-
-  // const offers = useAppSelector((state) => state.offers);
-  // const location = useAppSelector((state) => state.city);
-  // const property = offers.find((offer) => String(offer.id) === String(id));
-  // const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
-
-  // if (!currentOferId || isDataloading) {
-  //   return (<LoadingScreen />);
-  // }
 
   if (!currentOferId) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
   const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = currentOferId;
-  console.log(reviews);
+
   return (
     <>
       <Helmet>
@@ -146,8 +135,9 @@ function Property(): JSX.Element {
                     &&
                     reviews.length > 0
                     &&
-                    reviews.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-                      .reverse()
+                    reviews
+                      // .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+                      // .reverse()
                       .slice(0, SIMILAR_AD_COUNT)
                       .map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
                   }
@@ -155,7 +145,7 @@ function Property(): JSX.Element {
                 {
                   authorizationStatus === AuthorizationStatus.Auth
                     ?
-                    <ReviewForm />
+                    <ReviewForm offerId={offerId} />
                     :
                     null
                 }

@@ -1,13 +1,13 @@
 import { CITIES } from '../../consts';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity } from '../../store/action';
-import { useDispatch } from 'react-redux';
 import cn from 'classnames';
 
 function Tabs(): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useAppSelector((state) => state.city);
+
   return (
     <div className="tabs">
       <section className="locations container">
