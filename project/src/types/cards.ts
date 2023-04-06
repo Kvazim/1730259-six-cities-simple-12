@@ -4,6 +4,7 @@ export type Host = {
   avatarUrl: string;
   isPro: boolean;
   name: string;
+  id: number;
   }
 
 export type Card = {
@@ -46,3 +47,4 @@ export type Offer = {
 
 export type Offers = Offer[];
 
+export type OfferId = number;

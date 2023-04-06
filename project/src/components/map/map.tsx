@@ -46,7 +46,7 @@ function Map({ className, offers, location, focusCard, currrentPageProperty }: M
               ? currentCustomIcon
               : defaultCustomIcon
           )
-          .addTo(map);
+          .addTo(markerGroup);
       });
 
       return () => {

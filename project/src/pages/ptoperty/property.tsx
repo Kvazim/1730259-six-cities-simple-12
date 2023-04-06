@@ -3,29 +3,45 @@ import { Navigate, useParams } from 'react-router-dom';
 import PropertyDescription from '../../components/property-description/property-description';
 import PropertyInside from '../../components/property-inside/property-inside';
 import PropertyPhoto from '../../components/property-photo/property-photo';
-// import ReviewsItem from '../../components/reviews-item/reviews-item';
+import ReviewsItem from '../../components/reviews-item/reviews-item';
 import { changeInPercent, capitalize } from '../../utils/utils';
-// import { SIMILAR_AD_COUNT, SIMILAR_AD_OFFERS_COUNT } from '../../consts';
 import ReviewForm from '../../components/review-form/review-form';
-import { AppRoute, AuthorizationStatus } from '../../consts';
+import { AppRoute, AuthorizationStatus, MAX_IMAGES_OFFER, SIMILAR_AD_COUNT } from '../../consts';
 import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
-// import CitiesCard from '../../components/cities-card/cities-card';
-import { useAppSelector } from '../../hooks';
+import CitiesCard from '../../components/cities-card/cities-card';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchNearOffersAction, fetchOfferIdAction, fetchReviewsAction } from '../../store/api-actions';
+import { useEffect } from 'react';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function Property(): JSX.Element {
   const { id } = useParams();
+  const offerId = Number(id);
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const offers = useAppSelector((state) => state.offers);
+  const isCurrentOfferLoading = useAppSelector((state) => state.isCurrentOfferLoadingStatus);
+
+  useEffect(() => {
+    dispatch(fetchOfferIdAction(offerId));
+    dispatch(fetchReviewsAction(offerId));
+    dispatch(fetchNearOffersAction(offerId));
+  }, [dispatch, offerId]);
+
+  const currentOferId = useAppSelector((state) => state.offerId);
+  const reviews = useAppSelector((state) => state.reviews);
+  const similarOffers = useAppSelector((state) => state.nearOffers);
   const location = useAppSelector((state) => state.city);
-  const property = offers.find((offer) => String(offer.id) === String(id));
-  // const similarOffers = offers.filter((offer) => String(offer.id) !== String(id)).slice(0, SIMILAR_AD_OFFERS_COUNT);
-  if (property === undefined) {
+
+  if (isCurrentOfferLoading) {
+    return <LoadingScreen />;
+  }
+
+  if (!currentOferId) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
-  const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = property;
-  // const [{ review }] = reviews.filter((items) => String(items.id) === String(id)).map((element) => ({ review: element.review }));
+  const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = currentOferId;
 
   return (
     <>
@@ -38,9 +54,11 @@ function Property(): JSX.Element {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {
-                images.map((photoUrl, index) => (
-                  <PropertyPhoto key={String(photoUrl) + String(index)} photoUrl={photoUrl} />
-                ))
+                images
+                  .slice(0, MAX_IMAGES_OFFER)
+                  .map((photoUrl, index) => (
+                    <PropertyPhoto key={String(photoUrl) + String(index)} photoUrl={photoUrl} />
+                  ))
               }
             </div>
           </div>
@@ -116,35 +134,35 @@ function Property(): JSX.Element {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                {/* <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{review.length}</span></h2> */}
-                {/* <ul className="reviews__list">
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <ul className="reviews__list">
                   {
-                    review
+                    reviews
                     &&
-                    review.length > 0
+                    reviews.length > 0
                     &&
-                    review.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-                      .reverse()
+                    Array.from(reviews)
+                      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                       .slice(0, SIMILAR_AD_COUNT)
                       .map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
                   }
-                </ul> */}
+                </ul>
                 {
                   authorizationStatus === AuthorizationStatus.Auth
                     ?
-                    <ReviewForm />
+                    <ReviewForm offerId={offerId} />
                     :
                     null
                 }
               </section>
             </div>
           </div>
-          <Map className={'property'} offers={offers} currrentPageProperty={property} location={location} />
+          <Map className={'property'} offers={similarOffers.concat(currentOferId)} currrentPageProperty={currentOferId} location={location} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            {/* <div className="near-places__list places__list">
+            <div className="near-places__list places__list">
               {
                 similarOffers
                 && similarOffers.length > 0
@@ -153,7 +171,7 @@ function Property(): JSX.Element {
                 ))
               }
 
-            </div> */}
+            </div>
           </section>
         </div>
       </main>

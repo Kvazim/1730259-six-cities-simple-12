@@ -1,9 +1,11 @@
+import { Host } from './cards';
+
 export type Review = {
-  avatarUrl: string;
-  name: string;
-  score: number;
+  comment: string;
   date: string;
-  text: string;
+  id: number;
+  rating: number;
+  user: Host;
 }
 
 export type Reviews = Review[];
@@ -14,3 +16,9 @@ export type ReviewsItem = {
 };
 
 export type ReviewsList = ReviewsItem[];
+
+export type NewReview = {
+  offerId: number;
+  comment: string;
+  rating: number;
+};

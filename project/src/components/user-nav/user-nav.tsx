@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../consts';
-import { useAppSelector } from '../../hooks';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logOutAction } from '../../store/api-actions';
 
 function UserNav(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const userData = useAppSelector((state) => state.userData);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     authorizationStatus === AuthorizationStatus.Auth
@@ -16,11 +15,13 @@ function UserNav(): JSX.Element {
         <ul className="header__nav-list">
           <li className="header__nav-item user">
             <div className="header__nav-profile">
-              <div className="header__avatar-wrapper user__avatar-wrapper">
-                <img
-                  src={userData?.avatarUrl ?? './img/avatar.svg'}
-                  alt={userData?.name ?? 'User avatar.'}
-                />
+              <div className="header__avatar-wrapper user__avatar-wrapper"
+              // TODOS уточнить как сделать лучше
+                style={{
+                  backgroundImage: `url(${userData?.avatarUrl ?? './img/avatar.svg'})`,
+                  borderRadius: '50%'
+                }}
+              >
               </div>
               <span className="header__user-name user__name">{userData?.email}</span>
             </div>
