@@ -8,12 +8,12 @@ import {
   loadNearOffers,
   loadOfferId,
   loadOffers,
-  loadReviewId,
+  loadReviews,
   redirectToRoute,
   requireAuthorization,
+  setCurrentOfferLoadingStatus,
   setDataLoadingStatus,
   setError,
-  setReview,
   setReviewLoading
 } from './action';
 import { AuthData } from '../types/auth-data';
@@ -54,23 +54,25 @@ export const fetchOfferIdAction = createAsyncThunk<void, OfferId, {
   'data/loadOfferId',
   async (offerId, {dispatch, extra: api}) => {
     try {
+      dispatch(setCurrentOfferLoadingStatus(true));
       const {data} = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
       dispatch(loadOfferId(data));
+      dispatch(setCurrentOfferLoadingStatus(false));
     } catch {
       dispatch(redirectToRoute(AppRoute.PageNotFound));
     }
   },
 );
 
-export const fetchReviewIdAction = createAsyncThunk<void, OfferId, {
+export const fetchReviewsAction = createAsyncThunk<void, OfferId, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/loadReviewId',
+  'data/loadReviews',
   async (offerId, {dispatch, extra: api}) => {
     const {data} = await api.get<Reviews>(`${APIRoute.Reviews}/${offerId}`);
-    dispatch(loadReviewId(data));
+    dispatch(loadReviews(data));
   },
 );
 
@@ -84,7 +86,7 @@ export const addReviewAction = createAsyncThunk<void, NewReview, {
     try {
       dispatch(setReviewLoading(true));
       const {data} = await api.post<Reviews>(`${APIRoute.Reviews}/${offerId}`, {comment, rating});
-      dispatch(setReview(data));
+      dispatch(loadReviews(data));
     }
     finally {
       dispatch(setReviewLoading(false));
@@ -128,11 +130,10 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({ login: email, password }, { dispatch, extra: api }) => {
-    const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
-    saveToken(token);
+    const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
+    saveToken(data.token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Root));
-    const {data} = await api.get<UserData>(APIRoute.Login);
     dispatch(getUserData(data));
   },
 );

@@ -11,6 +11,7 @@ type ReviewFormProps = {
 function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
   const setReviewLoading = useAppSelector((state) => state.setReviewUserLoading);
+  // const reviews = useAppSelector((state) => state.reviews);
 
   const [isChecked, setIsChecked] = useState('0');
   const onChangeChecked = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -29,16 +30,20 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
     setIsSubmitActive(isChecked === '0' || (value.length < 50 || value.length > 300));
   }, [isChecked, value.length]);
 
-  const clearForm = () => {
-    if (isChecked !== '0') {
-      const raitingElement = document.getElementById(`${isChecked}-stars`);
-      if (raitingElement) {
-        (raitingElement as HTMLInputElement).checked = false;
-      }
-    }
-    setIsChecked('0');
-    setValue('');
-  };
+  // const clearForm = () => {
+  //   if (isChecked !== '0') {
+  //     const raitingElement = document.getElementById(`${isChecked}-stars`);
+  //     if (raitingElement) {
+  //       (raitingElement as HTMLInputElement).checked = false;
+  //     }
+  //   }
+  //   setIsChecked('0');
+  //   setValue('');
+  // };
+
+  // useEffect(() => {
+  //   clearForm();
+  // }, [reviews]);
 
   const onClickSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -47,12 +52,7 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
         offerId: offerId,
         comment: value,
         rating: Number(isChecked),
-      }))
-        .then((result) => {
-          if (result.meta.requestStatus === 'fulfilled') {
-            clearForm();
-          }
-        });
+      }));
     }
   };
 

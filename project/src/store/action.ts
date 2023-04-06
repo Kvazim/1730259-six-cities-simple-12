@@ -22,8 +22,8 @@ export const loadOfferId = createAction<Offer>(
   'data/loadOfferId'
 );
 
-export const loadReviewId = createAction<Reviews>(
-  'data/loadReviewId'
+export const loadReviews = createAction<Reviews>(
+  'data/loadReviews'
 );
 
 export const requireAuthorization = createAction<AuthorizationStatus>(
@@ -36,6 +36,10 @@ export const setError = createAction<string | null>(
 
 export const setDataLoadingStatus = createAction<boolean>(
   'data/isDataLoading'
+);
+
+export const setCurrentOfferLoadingStatus = createAction<boolean>(
+  'data/isCurrenOffer'
 );
 
 export const redirectToRoute = createAction<AppRoute>(

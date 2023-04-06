@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, changeSort, loadOffers, requireAuthorization, setError, setDataLoadingStatus, getUserData, loadOfferId, loadReviewId, loadNearOffers, setReviewLoading } from './action';
+import { changeCity, changeSort, loadOffers, requireAuthorization, setError, setDataLoadingStatus, getUserData, loadOfferId, loadReviews, loadNearOffers, setReviewLoading, setCurrentOfferLoadingStatus } from './action';
 import { AuthorizationStatus, DEFAULT_CITIES, DEFAULT_SORT } from '../consts';
 import { Offer, Offers } from '../types/cards';
 import { SortType } from '../consts';
@@ -13,9 +13,10 @@ type InitialState = {
   authorizationStatus: AuthorizationStatus;
   error: string | null;
   isDataLoading: boolean;
+  isCurrentOfferLoadingStatus: boolean;
   userData: UserData | null;
   offerId: Offer | null;
-  reviewId: Reviews;
+  reviews: Reviews;
   nearOffers: Offers;
   setReviewUserLoading: boolean;
 };
@@ -27,9 +28,10 @@ const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
   isDataLoading: false,
+  isCurrentOfferLoadingStatus: true,
   userData: null,
   offerId: null,
-  reviewId: [],
+  reviews: [],
   nearOffers: [],
   setReviewUserLoading: false,
 };
@@ -45,8 +47,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOfferId, (state, action) => {
       state.offerId = action.payload;
     })
-    .addCase(loadReviewId, (state, action) => {
-      state.reviewId = action.payload;
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
     })
     .addCase(loadNearOffers, (state, action) => {
       state.nearOffers = action.payload;
@@ -62,6 +64,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setDataLoadingStatus, (state, action) => {
       state.isDataLoading = action.payload;
+    })
+    .addCase(setCurrentOfferLoadingStatus, (state, action) => {
+      state.isCurrentOfferLoadingStatus = action.payload;
     })
     .addCase(setReviewLoading, (state, action) => {
       state.setReviewUserLoading = action.payload;

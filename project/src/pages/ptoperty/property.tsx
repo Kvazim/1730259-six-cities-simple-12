@@ -11,25 +11,31 @@ import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
 import CitiesCard from '../../components/cities-card/cities-card';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchNearOffersAction, fetchOfferIdAction, fetchReviewIdAction } from '../../store/api-actions';
+import { fetchNearOffersAction, fetchOfferIdAction, fetchReviewsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function Property(): JSX.Element {
   const { id } = useParams();
   const offerId = Number(id);
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isCurrentOfferLoading = useAppSelector((state) => state.isCurrentOfferLoadingStatus);
 
   useEffect(() => {
     dispatch(fetchOfferIdAction(offerId));
-    dispatch(fetchReviewIdAction(offerId));
+    dispatch(fetchReviewsAction(offerId));
     dispatch(fetchNearOffersAction(offerId));
   }, [dispatch, offerId]);
 
   const currentOferId = useAppSelector((state) => state.offerId);
-  const reviews = useAppSelector((state) => state.reviewId);
+  const reviews = useAppSelector((state) => state.reviews);
   const similarOffers = useAppSelector((state) => state.nearOffers);
   const location = useAppSelector((state) => state.city);
+
+  if (isCurrentOfferLoading) {
+    return <LoadingScreen />;
+  }
 
   if (!currentOferId) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
@@ -135,9 +141,8 @@ function Property(): JSX.Element {
                     &&
                     reviews.length > 0
                     &&
-                    reviews
-                      // .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-                      // .reverse()
+                    Array.from(reviews)
+                      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                       .slice(0, SIMILAR_AD_COUNT)
                       .map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
                   }
