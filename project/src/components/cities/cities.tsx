@@ -28,7 +28,7 @@ function Cities({ offers }: CitiesProp): JSX.Element {
         </div>
       </section>
       <div className="cities__right-section">
-        <Map className={'cities'} offers={offers} focusCard={focusCard} location={location} />
+        <Map className={'cities'} offers={offers} focusCard={focusCard} />
       </div>
     </div>
   );

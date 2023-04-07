@@ -62,3 +62,7 @@ export const setReviewLoading = createAction<boolean>(
 export const setReview = createAction<Reviews>(
   'data/setNewReview'
 );
+
+export const setReviewStatus = createAction<string>(
+  'data/setNewReviewStatus'
+);

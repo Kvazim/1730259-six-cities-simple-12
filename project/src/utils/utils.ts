@@ -23,7 +23,3 @@ export const getSortingCurrentOffers = (city: string = DEFAULT_CITIES, offers: O
 };
 
 export const getRandomArrayItem = (items: string[] | number[]):string | number => items[Math.floor(Math.random() * items.length)];
-
-// export function GetRandomArrayItem<T>(items: T[]) {
-//   return items[Math.floor(Math.random() * items.length)];
-// }

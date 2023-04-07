@@ -31,7 +31,6 @@ function Property(): JSX.Element {
   const currentOferId = useAppSelector((state) => state.offerId);
   const reviews = useAppSelector((state) => state.reviews);
   const similarOffers = useAppSelector((state) => state.nearOffers);
-  const location = useAppSelector((state) => state.city);
 
   if (isCurrentOfferLoading) {
     return <LoadingScreen />;
@@ -157,7 +156,7 @@ function Property(): JSX.Element {
               </section>
             </div>
           </div>
-          <Map className={'property'} offers={similarOffers.concat(currentOferId)} currrentPageProperty={currentOferId} location={location} />
+          <Map className={'property'} offers={similarOffers.concat(currentOferId)} currrentPageProperty={currentOferId} />
         </section>
         <div className="container">
           <section className="near-places places">

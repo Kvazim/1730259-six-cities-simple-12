@@ -10,7 +10,6 @@ type MapProps = {
   focusCard?: Offer | null;
   className: string;
   currrentPageProperty?: Offer;
-  location: string;
 }
 
 const defaultCustomIcon = leaflet.icon({
@@ -25,9 +24,9 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [14, 40]
 });
 
-function Map({ className, offers, location, focusCard, currrentPageProperty }: MapProps): JSX.Element {
+function Map({ className, offers, focusCard, currrentPageProperty }: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const cityLocation = offers.filter((offer) => location === offer.city.name)[0].city.location;
+  const cityLocation = offers[0].city.location;
   const map = useMap(mapRef, cityLocation);
 
   useEffect(() => {

@@ -14,7 +14,8 @@ import {
   setCurrentOfferLoadingStatus,
   setDataLoadingStatus,
   setError,
-  setReviewLoading
+  setReviewLoading,
+  setReviewStatus
 } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -83,14 +84,11 @@ export const addReviewAction = createAsyncThunk<void, NewReview, {
 }>(
   'data/setNewReview',
   async ({offerId, comment, rating}, {dispatch, extra: api}) => {
-    try {
-      dispatch(setReviewLoading(true));
-      const {data} = await api.post<Reviews>(`${APIRoute.Reviews}/${offerId}`, {comment, rating});
-      dispatch(loadReviews(data));
-    }
-    finally {
-      dispatch(setReviewLoading(false));
-    }
+    dispatch(setReviewLoading(true));
+    const response = await api.post<Reviews>(`${APIRoute.Reviews}/${offerId}`, {comment, rating});
+    dispatch(loadReviews(response.data));
+    dispatch(setReviewStatus(response.statusText));
+    dispatch(setReviewLoading(false));
   }
 );
 

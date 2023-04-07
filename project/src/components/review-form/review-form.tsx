@@ -1,5 +1,5 @@
 import RatingStars from '../rating-stars/rating-stars';
-import { stars, STAR_NAME } from '../../consts';
+import { stars, STAR_NAME, MIN_VALUE_REVIEW_LENGHT, MAX_VALUE_REVIEW_LENGHT } from '../../consts';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
@@ -11,7 +11,7 @@ type ReviewFormProps = {
 function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
   const setReviewLoading = useAppSelector((state) => state.setReviewUserLoading);
-  // const reviews = useAppSelector((state) => state.reviews);
+  const setReviewStatus = useAppSelector((state) => state.setReviewStatus);
 
   const [isChecked, setIsChecked] = useState('0');
   const onChangeChecked = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -27,23 +27,19 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
 
   const [isSubmitActive, setIsSubmitActive] = useState(false);
   useEffect(() => {
-    setIsSubmitActive(isChecked === '0' || (value.length < 50 || value.length > 300));
+    setIsSubmitActive(isChecked === '0' || (value.length < MIN_VALUE_REVIEW_LENGHT || value.length > MAX_VALUE_REVIEW_LENGHT));
   }, [isChecked, value.length]);
 
-  // const clearForm = () => {
-  //   if (isChecked !== '0') {
-  //     const raitingElement = document.getElementById(`${isChecked}-stars`);
-  //     if (raitingElement) {
-  //       (raitingElement as HTMLInputElement).checked = false;
-  //     }
-  //   }
-  //   setIsChecked('0');
-  //   setValue('');
-  // };
-
-  // useEffect(() => {
-  //   clearForm();
-  // }, [reviews]);
+  const resetChecked = () => {
+    if (isChecked !== '0') {
+      const raitingElement = document.getElementById(`${isChecked}-stars`);
+      if (raitingElement) {
+        (raitingElement as HTMLInputElement).checked = false;
+      }
+    }
+    setIsChecked('0');
+    setValue('');
+  };
 
   const onClickSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -53,6 +49,9 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
         comment: value,
         rating: Number(isChecked),
       }));
+      if (setReviewStatus === 'OK') {
+        resetChecked();
+      }
     }
   };
 
