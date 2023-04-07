@@ -75,3 +75,8 @@ export const TIMEOUT_SHOW_ERROR = 2000;
 export const MIN_VALUE_REVIEW_LENGHT = 50;
 
 export const MAX_VALUE_REVIEW_LENGHT = 300;
+
+export enum NameSpace {
+  Data = 'DATA',
+  User = 'USER',
+}

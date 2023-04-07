@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks';
 
-function CitiesEmpty(): JSX.Element {
+function PlacesEmpty(): JSX.Element {
   const location = useAppSelector((state) => state.city);
   return (
     <div className="cities__places-container cities__places-container--empty container">
@@ -15,4 +15,4 @@ function CitiesEmpty(): JSX.Element {
   );
 }
 
-export default CitiesEmpty;
+export default PlacesEmpty;

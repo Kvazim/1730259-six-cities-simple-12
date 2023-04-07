@@ -1,9 +1,8 @@
 import { Helmet } from 'react-helmet-async';
-import Cities from '../../components/cities/cities';
 import Tabs from '../../components/tabs/tabs';
-import CitiesEmpty from '../cities-empty/cities-empty';
 import { useAppSelector } from '../../hooks';
 import { getSortingCurrentOffers } from '../../utils/utils';
+import CitiesList from '../../components/cities/cities';
 
 function Main(): JSX.Element {
   const location = useAppSelector((state) => state.city);
@@ -18,15 +17,7 @@ function Main(): JSX.Element {
       </Helmet>
       <h1 className="visually-hidden">Cities</h1>
       <Tabs />
-      <div className="cities">
-        {
-          offers && offers.length > 0
-            ?
-            <Cities offers={offers} />
-            :
-            <CitiesEmpty />
-        }
-      </div>
+      <CitiesList offers={offers} />
     </main>
   );
 }
