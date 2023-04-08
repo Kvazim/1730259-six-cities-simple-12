@@ -14,7 +14,8 @@ function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
         &&
         reviews.length > 0
         &&
-        Array.from(reviews)
+        reviews
+          .slice()
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .slice(0, SIMILAR_AD_COUNT)
           .map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
