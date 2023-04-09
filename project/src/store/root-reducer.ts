@@ -4,4 +4,5 @@ import { userProcess } from './user-process/user-process.slice';
 
 export const rootReducer = combineReducers({
   [NameSpace.User]: userProcess.reducer,
+  [NameSpace.Offers]: 
 });

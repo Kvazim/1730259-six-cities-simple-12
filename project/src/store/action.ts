@@ -13,20 +13,8 @@ export const changeSort = createAction(
   (sort: SortType) => ({ payload: sort })
 );
 
-export const loadOffers = createAction<Offers>(
-  'data/loadOffers'
-);
-
-export const loadOfferId = createAction<Offer>(
-  'data/loadOfferId'
-);
-
 export const loadReviews = createAction<Reviews>(
   'data/loadReviews'
-);
-
-export const setDataLoadingStatus = createAction<boolean>(
-  'data/isDataLoading'
 );
 
 export const setCurrentOfferLoadingStatus = createAction<boolean>(
@@ -35,10 +23,6 @@ export const setCurrentOfferLoadingStatus = createAction<boolean>(
 
 export const redirectToRoute = createAction<AppRoute>(
   'app/redirectToRoute'
-);
-
-export const loadNearOffers = createAction<Offers>(
-  'data/loadNearOffers'
 );
 
 export const setReviewLoading = createAction<boolean>(
@@ -51,4 +35,23 @@ export const setReview = createAction<Reviews>(
 
 export const setReviewStatus = createAction<string>(
   'data/setNewReviewStatus'
+);
+
+
+
+
+export const loadOffers = createAction<Offers>(
+  'data/loadOffers'
+);
+
+export const loadOfferId = createAction<Offer>(
+  'data/loadOfferId'
+);
+
+export const loadNearOffers = createAction<Offers>(
+  'data/loadNearOffers'
+);
+
+export const setDataLoadingStatus = createAction<boolean>(
+  'data/isDataLoading'
 );

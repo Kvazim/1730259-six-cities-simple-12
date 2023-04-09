@@ -75,6 +75,6 @@ export const MIN_VALUE_REVIEW_LENGHT = 50;
 export const MAX_VALUE_REVIEW_LENGHT = 300;
 
 export enum NameSpace {
-  Data = 'DATA',
   User = 'USER',
+  Offers = 'OFFERS',
 }
