@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { SortType } from '../../consts';
 import { useAppSelector } from '../../hooks';
@@ -9,15 +9,15 @@ function PlacesSorting(): JSX.Element {
   const [isOpenSorting, setIsOpenSorting] = useState(false);
   const dispatch = useDispatch();
   const sortType = useAppSelector((state) => state.sortType);
+  const sortRef: RefObject<HTMLSpanElement> = useRef(null);
 
   useEffect(() => {
-    const placesSortingType = document.querySelector('.places__sorting-type');
     const closeSort = (evt: MouseEvent) => {
-      if (!placesSortingType) {
+      if (!sortRef.current || !(evt.target instanceof HTMLElement)) {
         return;
       }
 
-      if (evt.target !== placesSortingType) {
+      if (!sortRef.current.contains(evt.target)) {
         setIsOpenSorting(false);
       }
     };
@@ -30,7 +30,7 @@ function PlacesSorting(): JSX.Element {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0} onClick={() => setIsOpenSorting(!isOpenSorting)}>
+      <span className="places__sorting-type" tabIndex={0} onClick={() => setIsOpenSorting(!isOpenSorting)} ref={sortRef}>
         {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
