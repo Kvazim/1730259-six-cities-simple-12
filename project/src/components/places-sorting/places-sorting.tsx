@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux';
 import { SortType } from '../../consts';
 import { useAppSelector } from '../../hooks';
 import cn from 'classnames';
-import { changeSort } from '../../store/action';
+import { getChangeSortType } from '../../store/location-sorting-procces/location-sorting-procces.selector';
+import { changeSortType } from '../../store/location-sorting-procces/location-sorting-procces.slise';
 
 function PlacesSorting(): JSX.Element {
   const [isOpenSorting, setIsOpenSorting] = useState(false);
   const dispatch = useDispatch();
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getChangeSortType);
   const sortRef: RefObject<HTMLSpanElement> = useRef(null);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ function PlacesSorting(): JSX.Element {
                 )
               }
               tabIndex={0}
-              onClick={() => dispatch(changeSort(value))}
+              onClick={() => dispatch(changeSortType(value))}
             >
               {value}
             </li>

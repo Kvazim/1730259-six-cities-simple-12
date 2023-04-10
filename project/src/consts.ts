@@ -74,9 +74,13 @@ export const MIN_VALUE_REVIEW_LENGHT = 50;
 
 export const MAX_VALUE_REVIEW_LENGHT = 300;
 
+export const PASSWORD_REG_EXP = (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$/);
+
 export enum NameSpace {
   User = 'USER',
   Offers = 'OFFERS',
+  City = 'CITY',
+  Reviews = 'REVIEWS',
 }
 
 export enum Status {

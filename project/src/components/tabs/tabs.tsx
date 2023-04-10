@@ -1,12 +1,13 @@
 import { CITIES } from '../../consts';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity } from '../../store/action';
 import cn from 'classnames';
+import { getChangeCity } from '../../store/location-sorting-procces/location-sorting-procces.selector';
+import { changeCity } from '../../store/location-sorting-procces/location-sorting-procces.slise';
 
 function Tabs(): JSX.Element {
   const dispatch = useAppDispatch();
-  const location = useAppSelector((state) => state.city);
+  const location = useAppSelector(getChangeCity);
 
   return (
     <div className="tabs">

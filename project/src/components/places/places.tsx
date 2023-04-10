@@ -4,6 +4,7 @@ import PlacesSorting from '../places-sorting/places-sorting';
 import Map from '../map/map';
 import { useAppSelector } from '../../hooks';
 import PlacesList from '../places-list/places-list';
+import { getChangeCity } from '../../store/location-sorting-procces/location-sorting-procces.selector';
 
 type PlacesProp = {
   offers: Offers;
@@ -11,7 +12,7 @@ type PlacesProp = {
 
 function Places({ offers }: PlacesProp): JSX.Element {
   const [focusCard, setFocusCard] = useState<Offer | null>(null);
-  const location = useAppSelector((state) => state.city);
+  const location = useAppSelector(getChangeCity);
 
   return (
     <div className="cities__places-container container">

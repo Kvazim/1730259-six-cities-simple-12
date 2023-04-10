@@ -3,14 +3,16 @@ import Tabs from '../../components/tabs/tabs';
 import { useAppSelector } from '../../hooks';
 import { getCurrentOffers } from '../../utils/utils';
 import CitiesList from '../../components/cities-list/cities-list';
+import { getOffers } from '../../store/offer-procces/offer-procces.selector';
+import { getChangeCity } from '../../store/location-sorting-procces/location-sorting-procces.selector';
 
 function Main(): JSX.Element {
-  const location = useAppSelector((state) => state.city);
-  const offersState = useAppSelector((state) => state.offers);
+  const location = useAppSelector(getChangeCity);
+  const offersState = useAppSelector(getOffers);
   const sortOffers = getCurrentOffers(location, offersState);
 
   return (
-    <main className={`page__main page__main--index ${sortOffers.length < 1 ? 'page__main--index-empty' : '' }`}>
+    <main className={`page__main page__main--index ${sortOffers.length < 1 ? 'page__main--index-empty' : ''}`}>
       <Helmet>
         <title>six cities simple</title>
       </Helmet>

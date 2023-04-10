@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../consts';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logOutAction } from '../../store/api-actions';
+import { getAuthorizationStatus, getUserData } from '../../store/user-process/user-process.selector';
 
 function UserNav(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userData = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
 
   return (

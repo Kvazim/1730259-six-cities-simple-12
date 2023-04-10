@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { OfferData } from '../../types/state';
 import { NameSpace, Status } from '../../consts';
-import { fetchOfferIdAction, fetchOffersAction } from '../api-actions';
+import { fetchNearOffersAction, fetchOfferIdAction, fetchOffersAction } from '../api-actions';
 
 const initialState: OfferData = {
   offers: [],
   offerLoadingStatus: Status.Idle,
   currentOffer: null,
+  statusCurrentOffer: Status.Idle,
+  nearOffers: [],
 };
 
 export const offerData = createSlice({
@@ -26,14 +28,17 @@ export const offerData = createSlice({
         state.offerLoadingStatus = Status.Failed;
       })
       .addCase(fetchOfferIdAction.pending, (state) => {
-        state.offerLoadingStatus = Status.Loading;
+        state.statusCurrentOffer = Status.Loading;
       })
       .addCase(fetchOfferIdAction.fulfilled, (state, action) => {
         state.currentOffer = action.payload;
-        state.offerLoadingStatus = Status.Success;
+        state.statusCurrentOffer = Status.Success;
       })
       .addCase(fetchOfferIdAction.rejected, (state) => {
-        state.offerLoadingStatus = Status.Failed;
+        state.statusCurrentOffer = Status.Failed;
+      })
+      .addCase(fetchNearOffersAction.fulfilled, (state, action) => {
+        state.nearOffers = action.payload;
       });
   },
 });

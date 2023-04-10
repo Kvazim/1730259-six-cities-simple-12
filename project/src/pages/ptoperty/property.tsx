@@ -4,7 +4,7 @@ import PropertyDescription from '../../components/property-description/property-
 import PropertyInside from '../../components/property-inside/property-inside';
 import PropertyPhoto from '../../components/property-photo/property-photo';
 import { changeInPercent, capitalize } from '../../utils/utils';
-import { AppRoute, MAX_IMAGES_OFFER } from '../../consts';
+import { AppRoute, MAX_IMAGES_OFFER, Status } from '../../consts';
 import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
 import CitiesCard from '../../components/cities-card/cities-card';
@@ -13,12 +13,14 @@ import { fetchNearOffersAction, fetchOfferIdAction, fetchReviewsAction } from '.
 import { useEffect } from 'react';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
+import { getNearOfferId, getOfferId, getStatusOfferId } from '../../store/offer-procces/offer-procces.selector';
+import { getReviews } from '../../store/reviews-process/reviews-process.selector';
 
 function Property(): JSX.Element {
   const { id } = useParams();
   const offerId = Number(id);
   const dispatch = useAppDispatch();
-  const isCurrentOfferLoading = useAppSelector((state) => state.isCurrentOfferLoadingStatus);
+  const isCurrentOfferLoading = useAppSelector(getStatusOfferId);
 
   useEffect(() => {
     dispatch(fetchOfferIdAction(offerId));
@@ -26,11 +28,11 @@ function Property(): JSX.Element {
     dispatch(fetchNearOffersAction(offerId));
   }, [dispatch, offerId]);
 
-  const currentOferId = useAppSelector((state) => state.offerId);
-  const reviews = useAppSelector((state) => state.reviews);
-  const similarOffers = useAppSelector((state) => state.nearOffers);
+  const currentOferId = useAppSelector(getOfferId);
+  const reviews = useAppSelector(getReviews);
+  const similarOffers = useAppSelector(getNearOfferId);
 
-  if (isCurrentOfferLoading) {
+  if (isCurrentOfferLoading === Status.Loading) {
     return <LoadingScreen />;
   }
 
