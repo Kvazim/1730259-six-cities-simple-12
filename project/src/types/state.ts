@@ -1,6 +1,6 @@
-import { AuthorizationStatus } from '../consts.js';
+import { AuthorizationStatus, Status } from '../consts.js';
 import {store} from '../store/index.js';
-import { Offers, OfferId } from './cards.js';
+import { Offer, Offers } from './cards.js';
 import { UserData } from './user-data.js';
 
 export type UserProcess = {
@@ -8,10 +8,10 @@ export type UserProcess = {
   userData: UserData | null;
 };
 
-export type OfferProcess = {
+export type OfferData = {
   offers: Offers;
-  offerId: OfferId;
-  offerLoadingStatus: boolean;
+  offerLoadingStatus: Status;
+  currentOffer: Offer | null;
 };
 
 export type State = ReturnType<typeof store.getState>;

@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { SortType, AppRoute } from '../consts';
-import { Offers, Offer } from '../types/cards';
+import { Offers } from '../types/cards';
 import { Reviews } from '../types/reviews';
 
 export const changeCity = createAction(
@@ -39,19 +39,6 @@ export const setReviewStatus = createAction<string>(
 
 
 
-
-export const loadOffers = createAction<Offers>(
-  'data/loadOffers'
-);
-
-export const loadOfferId = createAction<Offer>(
-  'data/loadOfferId'
-);
-
 export const loadNearOffers = createAction<Offers>(
   'data/loadNearOffers'
-);
-
-export const setDataLoadingStatus = createAction<boolean>(
-  'data/isDataLoading'
 );

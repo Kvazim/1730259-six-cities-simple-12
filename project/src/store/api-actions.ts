@@ -5,12 +5,8 @@ import { OfferId, Offers, Offer } from '../types/cards';
 import { APIRoute, AppRoute } from '../consts';
 import {
   loadNearOffers,
-  loadOfferId,
-  loadOffers,
   loadReviews,
   redirectToRoute,
-  setCurrentOfferLoadingStatus,
-  setDataLoadingStatus,
   setReviewLoading,
   setReviewStatus
 } from './action';
@@ -19,21 +15,18 @@ import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import { NewReview, Reviews } from '../types/reviews';
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
+export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
   'data/loadOffers',
-  async (_arg, { dispatch, extra: api }) => {
-    dispatch(setDataLoadingStatus(true));
+  async (_arg, { extra: api }) => {
     const { data } = await api.get<Offers>(APIRoute.Offers);
-    dispatch(setDataLoadingStatus(false));
-    dispatch(loadOffers(data));
+    return data;
   },
 );
 
-export const fetchOfferIdAction = createAsyncThunk<void, OfferId, {
+export const fetchOfferIdAction = createAsyncThunk<Offer, OfferId, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -41,10 +34,8 @@ export const fetchOfferIdAction = createAsyncThunk<void, OfferId, {
   'data/loadOfferId',
   async (offerId, { dispatch, extra: api }) => {
     try {
-      dispatch(setCurrentOfferLoadingStatus(true));
       const { data } = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
-      dispatch(loadOfferId(data));
-      dispatch(setCurrentOfferLoadingStatus(false));
+      return data;
     } catch {
       dispatch(redirectToRoute(AppRoute.PageNotFound));
     }
