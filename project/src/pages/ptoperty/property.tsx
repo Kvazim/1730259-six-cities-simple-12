@@ -21,16 +21,15 @@ function Property(): JSX.Element {
   const offerId = Number(id);
   const dispatch = useAppDispatch();
   const isCurrentOfferLoading = useAppSelector(getStatusOfferId);
+  const currentOferId = useAppSelector(getOfferId);
+  const reviews = useAppSelector(getReviews);
+  const similarOffers = useAppSelector(getNearOfferId);
 
   useEffect(() => {
     dispatch(fetchOfferIdAction(offerId));
     dispatch(fetchReviewsAction(offerId));
     dispatch(fetchNearOffersAction(offerId));
   }, [dispatch, offerId]);
-
-  const currentOferId = useAppSelector(getOfferId);
-  const reviews = useAppSelector(getReviews);
-  const similarOffers = useAppSelector(getNearOfferId);
 
   if (isCurrentOfferLoading === Status.Loading) {
     return <LoadingScreen />;

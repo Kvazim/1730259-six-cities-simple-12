@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
 import { getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process.selector';
+import { toast } from 'react-toastify';
 
 type ReviewFormProps = {
   offerId: number;
@@ -11,20 +12,9 @@ type ReviewFormProps = {
 
 function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const setReviewStatus = useAppSelector(getReviewsLoadingStatus);
-  const isReviewLoading = false;
+  const getReviewStatus = useAppSelector(getReviewsLoadingStatus);
 
-  // useEffect(() => {
-
-
-  //   if (setReviewStatus === Status.Loading) {
-  //     isReviewLoading = true;
-  //     return isReviewLoading;
-  //   }
-
-  //   return isReviewLoading;
-  // },[setReviewStatus]);
-
+  const isReviewLoading = getReviewStatus === Status.Loading;
 
   const [isChecked, setIsChecked] = useState('0');
   const onChangeChecked = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -62,8 +52,13 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
         comment: value,
         rating: Number(isChecked),
       }));
-      if (setReviewStatus === Status.Success) {
+
+      if (getReviewStatus === Status.Success) {
         resetChecked();
+      }
+
+      if (getReviewStatus === Status.Failed) {
+        toast.warn('Ошибка отправки, попробуйте еще раз');
       }
     }
   };
