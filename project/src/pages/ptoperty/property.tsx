@@ -14,7 +14,9 @@ import { useEffect } from 'react';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
 import { getNearOfferId, getOfferId, getStatusOfferId } from '../../store/offer-procces/offer-procces.selector';
-import { getReviews } from '../../store/reviews-process/reviews-process.selector';
+import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process.selector';
+import ErrorRewiewsSreen from '../../components/error-rewiews-sreen/error-rewiews-sreen';
+import ErrorOffersScreen from '../../components/error-screen/error-offers-screen';
 
 function Property(): JSX.Element {
   const { id } = useParams();
@@ -24,6 +26,7 @@ function Property(): JSX.Element {
   const currentOferId = useAppSelector(getOfferId);
   const reviews = useAppSelector(getReviews);
   const similarOffers = useAppSelector(getNearOfferId);
+  const reviewsLoadingStatus = useAppSelector(getReviewsLoadingStatus);
 
   useEffect(() => {
     dispatch(fetchOfferIdAction(offerId));
@@ -31,8 +34,12 @@ function Property(): JSX.Element {
     dispatch(fetchNearOffersAction(offerId));
   }, [dispatch, offerId]);
 
-  if (isCurrentOfferLoading === Status.Loading) {
+  if ((isCurrentOfferLoading === Status.Loading) || (isCurrentOfferLoading === Status.Idle)) {
     return <LoadingScreen />;
+  }
+
+  if (isCurrentOfferLoading === Status.Failed) {
+    return <ErrorOffersScreen />
   }
 
   if (!currentOferId) {
@@ -131,7 +138,13 @@ function Property(): JSX.Element {
                   }
                 </div>
               </div>
-              <PropertyReviews reviews={reviews} offerId={offerId} />
+              {
+                (reviewsLoadingStatus === Status.Failed)
+                  ?
+                  <ErrorRewiewsSreen offerId={offerId} />
+                  :
+                  <PropertyReviews reviews={reviews} offerId={offerId} />
+              }
             </div>
           </div>
           <Map className={'property'} offers={similarOffers.concat(currentOferId)} currrentPageProperty={currentOferId} />

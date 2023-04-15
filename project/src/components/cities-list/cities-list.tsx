@@ -1,8 +1,10 @@
+import { Status } from '../../consts';
 import { useAppSelector } from '../../hooks';
 import PlacesEmpty from '../../pages/places-empty/places-empty';
-import { getChangeSortType } from '../../store/location-sorting-procces/location-sorting-procces.selector';
+import { getOfferStatus } from '../../store/offer-procces/offer-procces.selector';
 import { Offers } from '../../types/cards';
-import { getSortingCurrentOffers } from '../../utils/utils';
+import ErrorOffersScreen from '../error-screen/error-offers-screen';
+
 import Places from '../places/places';
 
 type CitiesListProps = {
@@ -10,15 +12,18 @@ type CitiesListProps = {
 }
 
 function CitiesList({ offers }: CitiesListProps): JSX.Element {
-  const sortType = useAppSelector(getChangeSortType);
-  const sortTypeOffers = getSortingCurrentOffers(offers, sortType);
+  const errorLoading = useAppSelector(getOfferStatus);
+
+  if (errorLoading === Status.Failed) {
+    return <ErrorOffersScreen />;
+  }
 
   return (
     <div className="cities">
       {
-        sortTypeOffers && sortTypeOffers.length > 0
+        offers && offers.length > 0
           ?
-          <Places offers={sortTypeOffers} />
+          <Places offers={offers} />
           :
           <PlacesEmpty />
       }

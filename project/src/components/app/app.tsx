@@ -22,6 +22,7 @@ function App(): JSX.Element {
       <LoadingScreen />
     );
   }
+
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>

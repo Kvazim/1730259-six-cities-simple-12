@@ -17,9 +17,8 @@ function UserNav(): JSX.Element {
           <li className="header__nav-item user">
             <div className="header__nav-profile">
               <div className="header__avatar-wrapper user__avatar-wrapper"
-              // TODOS уточнить как сделать лучше
                 style={{
-                  backgroundImage: `url(${userData?.avatarUrl ?? './img/avatar.svg'})`,
+                  backgroundImage: `url(${userData?.avatarUrl ?? ''})`,
                   borderRadius: '50%'
                 }}
               >

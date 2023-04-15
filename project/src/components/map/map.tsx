@@ -28,7 +28,7 @@ function Map({ className, offers, focusCard, currrentPageProperty }: MapProps): 
   const mapRef = useRef(null);
   const cityLocation = offers[0].city.location;
   const map = useMap(mapRef, cityLocation);
-
+  console.info('<Map />: Render');
   useEffect(() => {
     if (map) {
       map.flyTo([cityLocation.latitude, cityLocation.longitude], cityLocation.zoom);

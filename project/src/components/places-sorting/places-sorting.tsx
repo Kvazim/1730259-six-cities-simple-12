@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { RefObject, memo, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { SortType } from '../../consts';
 import { useAppSelector } from '../../hooks';
@@ -59,4 +59,4 @@ function PlacesSorting(): JSX.Element {
   );
 }
 
-export default PlacesSorting;
+export default memo(PlacesSorting);
