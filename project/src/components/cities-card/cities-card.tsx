@@ -3,6 +3,7 @@ import { Offer } from '../../types/cards';
 import { changeInPercent, capitalize } from '../../utils/utils';
 import { AppRoute } from '../../consts';
 import Premium from '../premium/premium';
+import { memo } from 'react';
 
 type CitiesCardProp = {
   offer: Offer;
@@ -51,4 +52,4 @@ function CitiesCard({ offer, onFocusCard, className }: CitiesCardProp): JSX.Elem
   );
 }
 
-export default CitiesCard;
+export default memo(CitiesCard);

@@ -3,10 +3,8 @@ import { Navigate, useParams } from 'react-router-dom';
 import PropertyDescription from '../../components/property-description/property-description';
 import PropertyInside from '../../components/property-inside/property-inside';
 import PropertyPhoto from '../../components/property-photo/property-photo';
-import ReviewsItem from '../../components/reviews-item/reviews-item';
 import { changeInPercent, capitalize } from '../../utils/utils';
-import ReviewForm from '../../components/review-form/review-form';
-import { AppRoute, AuthorizationStatus, MAX_IMAGES_OFFER, SIMILAR_AD_COUNT } from '../../consts';
+import { AppRoute, MAX_IMAGES_OFFER, Status } from '../../consts';
 import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
 import CitiesCard from '../../components/cities-card/cities-card';
@@ -14,13 +12,21 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchNearOffersAction, fetchOfferIdAction, fetchReviewsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import PropertyReviews from '../../components/property-reviews/property-reviews';
+import { getNearOfferId, getOfferId, getStatusOfferId } from '../../store/offer-procces/offer-procces.selector';
+import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process.selector';
+import ErrorRewiewsSreen from '../../components/error-rewiews-sreen/error-rewiews-sreen';
+import ErrorOffersScreen from '../../components/error-screen/error-offers-screen';
 
 function Property(): JSX.Element {
   const { id } = useParams();
   const offerId = Number(id);
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isCurrentOfferLoading = useAppSelector((state) => state.isCurrentOfferLoadingStatus);
+  const isCurrentOfferLoading = useAppSelector(getStatusOfferId);
+  const currentOferId = useAppSelector(getOfferId);
+  const reviews = useAppSelector(getReviews);
+  const similarOffers = useAppSelector(getNearOfferId);
+  const reviewsLoadingStatus = useAppSelector(getReviewsLoadingStatus);
 
   useEffect(() => {
     dispatch(fetchOfferIdAction(offerId));
@@ -28,13 +34,12 @@ function Property(): JSX.Element {
     dispatch(fetchNearOffersAction(offerId));
   }, [dispatch, offerId]);
 
-  const currentOferId = useAppSelector((state) => state.offerId);
-  const reviews = useAppSelector((state) => state.reviews);
-  const similarOffers = useAppSelector((state) => state.nearOffers);
-  const location = useAppSelector((state) => state.city);
-
-  if (isCurrentOfferLoading) {
+  if ((isCurrentOfferLoading === Status.Loading) || (isCurrentOfferLoading === Status.Idle)) {
     return <LoadingScreen />;
+  }
+
+  if (isCurrentOfferLoading === Status.Failed) {
+    return <ErrorOffersScreen />
   }
 
   if (!currentOferId) {
@@ -133,31 +138,16 @@ function Property(): JSX.Element {
                   }
                 </div>
               </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ul className="reviews__list">
-                  {
-                    reviews
-                    &&
-                    reviews.length > 0
-                    &&
-                    Array.from(reviews)
-                      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-                      .slice(0, SIMILAR_AD_COUNT)
-                      .map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
-                  }
-                </ul>
-                {
-                  authorizationStatus === AuthorizationStatus.Auth
-                    ?
-                    <ReviewForm offerId={offerId} />
-                    :
-                    null
-                }
-              </section>
+              {
+                (reviewsLoadingStatus === Status.Failed)
+                  ?
+                  <ErrorRewiewsSreen offerId={offerId} />
+                  :
+                  <PropertyReviews reviews={reviews} offerId={offerId} />
+              }
             </div>
           </div>
-          <Map className={'property'} offers={similarOffers.concat(currentOferId)} currrentPageProperty={currentOferId} location={location} />
+          <Map className={'property'} offers={similarOffers.concat(currentOferId)} currrentPageProperty={currentOferId} />
         </section>
         <div className="container">
           <section className="near-places places">

@@ -1,23 +1,24 @@
-import { useEffect, useState } from 'react';
+import { RefObject, memo, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { SortType } from '../../consts';
 import { useAppSelector } from '../../hooks';
 import cn from 'classnames';
-import { changeSort } from '../../store/action';
+import { getChangeSortType } from '../../store/location-sorting-procces/location-sorting-procces.selector';
+import { changeSortType } from '../../store/location-sorting-procces/location-sorting-procces.slise';
 
 function PlacesSorting(): JSX.Element {
   const [isOpenSorting, setIsOpenSorting] = useState(false);
   const dispatch = useDispatch();
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getChangeSortType);
+  const sortRef: RefObject<HTMLSpanElement> = useRef(null);
 
   useEffect(() => {
-    const placesSortingType = document.querySelector('.places__sorting-type');
     const closeSort = (evt: MouseEvent) => {
-      if (!placesSortingType) {
+      if (!sortRef.current || !(evt.target instanceof HTMLElement)) {
         return;
       }
 
-      if (evt.target !== placesSortingType) {
+      if (!sortRef.current.contains(evt.target)) {
         setIsOpenSorting(false);
       }
     };
@@ -30,7 +31,7 @@ function PlacesSorting(): JSX.Element {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0} onClick={() => setIsOpenSorting(!isOpenSorting)}>
+      <span className="places__sorting-type" tabIndex={0} onClick={() => setIsOpenSorting(!isOpenSorting)} ref={sortRef}>
         {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
@@ -47,7 +48,7 @@ function PlacesSorting(): JSX.Element {
                 )
               }
               tabIndex={0}
-              onClick={() => dispatch(changeSort(value))}
+              onClick={() => dispatch(changeSortType(value))}
             >
               {value}
             </li>
@@ -58,4 +59,4 @@ function PlacesSorting(): JSX.Element {
   );
 }
 
-export default PlacesSorting;
+export default memo(PlacesSorting);

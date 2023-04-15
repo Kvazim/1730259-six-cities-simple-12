@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import CitiesCard from '../cities-card/cities-card';
 import { Offer, Offers } from '../../types/cards';
 import PlacesSorting from '../places-sorting/places-sorting';
 import Map from '../map/map';
 import { useAppSelector } from '../../hooks';
+import PlacesList from '../places-list/places-list';
+import { getChangeCity } from '../../store/location-sorting-procces/location-sorting-procces.selector';
 
-type CitiesProp = {
+type PlacesProp = {
   offers: Offers;
 }
 
-function Cities({ offers }: CitiesProp): JSX.Element {
+function Places({ offers }: PlacesProp): JSX.Element {
   const [focusCard, setFocusCard] = useState<Offer | null>(null);
-  const location = useAppSelector((state) => state.city);
+  const location = useAppSelector(getChangeCity);
 
   return (
     <div className="cities__places-container container">
@@ -19,19 +20,13 @@ function Cities({ offers }: CitiesProp): JSX.Element {
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{offers.length} places to stay in {location}</b>
         <PlacesSorting />
-        <div className="cities__places-list places__list tabs__content">
-          {
-            offers.map((offer) => (
-              <CitiesCard key={offer.id} className={'cities'} offer={offer} onFocusCard={setFocusCard} />
-            ))
-          }
-        </div>
+        <PlacesList offers={offers} setFocusCard={setFocusCard} />
       </section>
       <div className="cities__right-section">
-        <Map className={'cities'} offers={offers} focusCard={focusCard} location={location} />
+        <Map className={'cities'} offers={offers} focusCard={focusCard} />
       </div>
     </div>
   );
 }
 
-export default Cities;
+export default Places;

@@ -70,4 +70,22 @@ export const BASE_URL = 'https://12.react.pages.academy/six-cities-simple';
 
 export const REQUEST_TIMEOUT = 5000;
 
-export const TIMEOUT_SHOW_ERROR = 2000;
+export const MIN_VALUE_REVIEW_LENGHT = 50;
+
+export const MAX_VALUE_REVIEW_LENGHT = 300;
+
+export const PASSWORD_REG_EXP = (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$/);
+
+export enum NameSpace {
+  User = 'USER',
+  Offers = 'OFFERS',
+  City = 'CITY',
+  Reviews = 'REVIEWS',
+}
+
+export enum Status {
+  Idle = 'Idle',
+  Loading = 'Loading',
+  Success = 'Success',
+  Failed = 'Failed',
+}

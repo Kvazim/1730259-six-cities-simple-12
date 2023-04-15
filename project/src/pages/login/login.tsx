@@ -3,10 +3,11 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
-import { AppRoute, CITIES } from '../../consts';
+import { AppRoute, CITIES, PASSWORD_REG_EXP } from '../../consts';
 import { useAppDispatch } from '../../hooks';
 import { getRandomArrayItem } from '../../utils/utils';
-import { changeCity } from '../../store/action';
+import { changeCity } from '../../store/location-sorting-procces/location-sorting-procces.slise';
+import { toast } from 'react-toastify';
 
 function Login(): JSX.Element {
   const [randomCity,] = useState(getRandomArrayItem(CITIES));
@@ -24,11 +25,15 @@ function Login(): JSX.Element {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
-      });
-      navigate(AppRoute.Root);
+      if (PASSWORD_REG_EXP.test(passwordRef.current.value)) {
+        onSubmit({
+          login: loginRef.current.value,
+          password: passwordRef.current.value,
+        });
+        navigate(AppRoute.Root);
+      } else {
+        toast.warn('Пароль должен содержать одну цифру и букву');
+      }
     }
   };
 
