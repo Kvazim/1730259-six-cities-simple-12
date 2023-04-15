@@ -39,7 +39,7 @@ function Property(): JSX.Element {
   }
 
   if (isCurrentOfferLoading === Status.Failed) {
-    return <ErrorOffersScreen />
+    return <ErrorOffersScreen />;
   }
 
   if (!currentOferId) {
