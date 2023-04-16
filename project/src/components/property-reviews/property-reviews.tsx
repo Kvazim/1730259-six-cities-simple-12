@@ -1,17 +1,17 @@
 import { AuthorizationStatus } from '../../consts';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
-import { Reviews } from '../../types/reviews';
 import ReviewForm from '../review-form/review-form';
 import ReviewsList from '../reviews-list/reviews-list';
+import { getReviews } from '../../store/reviews-process/reviews-process.selector';
 
 type PropertyReviewsProps = {
-  reviews: Reviews;
   offerId: number;
 }
 
-function PropertyReviews({ reviews, offerId }: PropertyReviewsProps): JSX.Element {
+function PropertyReviews({ offerId }: PropertyReviewsProps): JSX.Element {
   const isAuthChecked = useAppSelector(getAuthorizationStatus);
+  const reviews = useAppSelector(getReviews);
 
   return (
     <section className="property__reviews reviews">
