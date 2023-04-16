@@ -13,6 +13,7 @@ type CitiesCardProp = {
 
 function CitiesCard({ offer, onFocusCard, className }: CitiesCardProp): JSX.Element {
   const { isPremium, previewImage, price, title, type, id, rating } = offer;
+
   return (
     <article
       className={`${className}__card place-card`}
