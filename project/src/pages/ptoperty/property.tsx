@@ -14,8 +14,8 @@ import { useEffect } from 'react';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
 import { getNearOfferId, getOfferId, getStatusOfferId } from '../../store/offer-procces/offer-procces.selector';
-import { getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process.selector';
-import ErrorRewiewsSreen from '../../components/error-rewiews-sreen/error-rewiews-sreen';
+// import { getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process.selector';
+// import ErrorRewiewsSreen from '../../components/error-rewiews-sreen/error-rewiews-sreen';
 import ErrorOffersScreen from '../../components/error-screen/error-offers-screen';
 
 function Property(): JSX.Element {
@@ -25,7 +25,7 @@ function Property(): JSX.Element {
   const isCurrentOfferLoading = useAppSelector(getStatusOfferId);
   const currentOfer = useAppSelector(getOfferId);
   const similarOffers = useAppSelector(getNearOfferId);
-  const reviewsLoadingStatus = useAppSelector(getReviewsLoadingStatus);
+  // const reviewsLoadingStatus = useAppSelector(getReviewsLoadingStatus);
 
   useEffect(() => {
     dispatch(fetchOfferIdAction(offerId));
@@ -137,13 +137,14 @@ function Property(): JSX.Element {
                   }
                 </div>
               </div>
-              {
+              {/* {
                 (reviewsLoadingStatus === Status.Failed)
                   ?
                   <ErrorRewiewsSreen offerId={offerId} />
                   :
                   <PropertyReviews offerId={offerId} />
-              }
+              } */}
+              <PropertyReviews offerId={offerId} />
             </div>
           </div>
           <Map className={'property'} offers={similarOffers.concat(currentOfer)} currrentPageProperty={currentOfer} />
