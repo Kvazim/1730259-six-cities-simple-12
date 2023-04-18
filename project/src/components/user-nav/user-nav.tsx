@@ -3,6 +3,7 @@ import { AuthorizationStatus } from '../../consts';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logOutAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getUserData } from '../../store/user-process/user-process.selector';
+import { memo } from 'react';
 
 function UserNav(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -54,4 +55,4 @@ function UserNav(): JSX.Element {
   );
 }
 
-export default UserNav;
+export default memo(UserNav);

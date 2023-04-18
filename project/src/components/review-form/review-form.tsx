@@ -34,12 +34,6 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
   }, [isChecked, value.length]);
 
   const resetChecked = () => {
-    if (isChecked !== '0') {
-      const raitingElement = document.getElementById(`${isChecked}-stars`);
-      if (raitingElement) {
-        (raitingElement as HTMLInputElement).checked = false;
-      }
-    }
     setIsChecked('0');
     setValue('');
   };
