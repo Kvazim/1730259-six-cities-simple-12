@@ -1,7 +1,5 @@
-import { useAppSelector } from '../../hooks';
-import { getChangeSortType } from '../../store/location-sorting-procces/location-sorting-procces.selector';
+import { memo } from 'react';
 import { Offer, Offers } from '../../types/cards';
-import { getSortingCurrentOffers } from '../../utils/utils';
 import CitiesCard from '../cities-card/cities-card';
 
 type PlacesListProps = {
@@ -10,13 +8,10 @@ type PlacesListProps = {
 }
 
 function PlacesList({offers, setFocusCard}: PlacesListProps): JSX.Element {
-  const sortType = useAppSelector(getChangeSortType);
-  const sortTypeOffers = getSortingCurrentOffers(offers, sortType);
-
   return (
     <div className="cities__places-list places__list tabs__content">
       {
-        sortTypeOffers.map((offer) => (
+        offers.map((offer) => (
           <CitiesCard key={offer.id} className={'cities'} offer={offer} onFocusCard={setFocusCard} />
         ))
       }
@@ -24,4 +19,4 @@ function PlacesList({offers, setFocusCard}: PlacesListProps): JSX.Element {
   );
 }
 
-export default PlacesList;
+export default memo(PlacesList);

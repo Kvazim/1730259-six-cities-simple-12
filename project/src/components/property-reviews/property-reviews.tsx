@@ -1,22 +1,30 @@
-import { AuthorizationStatus } from '../../consts';
+import { AuthorizationStatus, Status } from '../../consts';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
-import { Reviews } from '../../types/reviews';
 import ReviewForm from '../review-form/review-form';
 import ReviewsList from '../reviews-list/reviews-list';
+import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process.selector';
+import ErrorRewiewsSreen from '../../components/error-rewiews-sreen/error-rewiews-sreen';
 
 type PropertyReviewsProps = {
-  reviews: Reviews;
   offerId: number;
 }
 
-function PropertyReviews({ reviews, offerId }: PropertyReviewsProps): JSX.Element {
+function PropertyReviews({ offerId }: PropertyReviewsProps): JSX.Element {
   const isAuthChecked = useAppSelector(getAuthorizationStatus);
+  const reviews = useAppSelector(getReviews);
+  const reviewsLoadingStatus = useAppSelector(getReviewsLoadingStatus);
 
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-      <ReviewsList reviews={reviews} />
+      {
+        (reviewsLoadingStatus === Status.Failed)
+          ?
+          <ErrorRewiewsSreen offerId={offerId} />
+          :
+          <ReviewsList reviews={reviews} />
+      }
       {
         isAuthChecked === AuthorizationStatus.Auth
           ?

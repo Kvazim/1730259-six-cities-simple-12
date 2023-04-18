@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import Logo from '../logo/logo';
 import UserNav from '../user-nav/user-nav';
 import { AppRoute } from '../../consts';
+import { memo } from 'react';
 
 function Header(): JSX.Element {
   const location = useLocation();
@@ -18,4 +19,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);

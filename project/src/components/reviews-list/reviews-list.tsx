@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { SIMILAR_AD_COUNT } from '../../consts';
 import { Reviews } from '../../types/reviews';
 import ReviewsItem from '../reviews-item/reviews-item';
@@ -7,18 +8,21 @@ type ReviewsListProps = {
 }
 
 function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
+  const sortingReviws = useMemo(() => (
+    reviews
+      .slice()
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, SIMILAR_AD_COUNT)
+  ), [reviews]);
+
   return (
     <ul className="reviews__list">
       {
-        reviews
+        sortingReviws
         &&
-        reviews.length > 0
+        sortingReviws.length > 0
         &&
-        reviews
-          .slice()
-          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-          .slice(0, SIMILAR_AD_COUNT)
-          .map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
+        sortingReviws.map((item, index) => <ReviewsItem key={String(item) + String(index)} review={item} />)
       }
     </ul>
   );

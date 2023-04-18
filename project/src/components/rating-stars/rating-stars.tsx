@@ -19,7 +19,7 @@ function RatingStars({ stars, onChangeChecked, isChecked, isDisabled }: RatingSt
               value={`${stars.length - index}`}
               id={`${stars.length - index}-stars`}
               type="radio"
-              defaultChecked={isChecked === `${stars.length - index}`}
+              checked={isChecked === `${stars.length - index}`}
               disabled={isDisabled}
             />
             <label htmlFor={`${stars.length - index}-stars`} className="reviews__rating-label form__rating-label" title={title}>
