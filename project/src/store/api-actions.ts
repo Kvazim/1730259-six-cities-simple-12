@@ -3,9 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { OfferId, Offers, Offer } from '../types/cards';
 import { APIRoute, AppRoute } from '../consts';
-import {
-  redirectToRoute,
-} from './action';
+import { redirectToRoute } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
