@@ -37,8 +37,6 @@ describe('Async action', () => {
     ThunkDispatch<State, typeof api, Action>
   >(middlewares);
 
-  const fakeOffersData = makeFackeOffersData();
-
   describe('Async auth action', () => {
     it('should authorization status is «auth» when server return 200', async () => {
       const store = mockStore();
@@ -108,6 +106,7 @@ describe('Async action', () => {
   describe('Async offer action', () => {
     it('responds with a list of offers from hosts if response 200', async () => {
       const store = mockStore();
+      const fakeOffersData = makeFackeOffersData();
 
       mockAPI
         .onGet(APIRoute.Offers)
@@ -177,13 +176,13 @@ describe('Async action', () => {
 
     it('should dispatch fetchNearOffersAction return 200', async () => {
       const store = mockStore();
-      const fakeOfferData = makeFackeOfferData();
+      const fakeOffersData = makeFackeOffersData();
       const fakeId = makeFakeId();
       const url = `${APIRoute.Offers}/${fakeId}/nearby`;
 
       mockAPI
         .onGet(url)
-        .reply(200, fakeOfferData);
+        .reply(200, fakeOffersData);
 
       await store.dispatch(fetchNearOffersAction(fakeId));
       const actions = store.getActions().map(({ type }) => type);
