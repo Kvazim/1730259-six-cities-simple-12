@@ -42,6 +42,7 @@ describe('Async action', () => {
   describe('Async auth action', () => {
     it('should authorization status is «auth» when server return 200', async () => {
       const store = mockStore();
+
       mockAPI
         .onGet(APIRoute.Login)
         .reply(200, []);
@@ -271,26 +272,26 @@ describe('Async action', () => {
         addReviewAction.fulfilled.type
       ]);
     });
-  });
 
-  it('should dispatch addReviewAction when POST /comments if response 404', async () => {
-    const fakeUserReview = makeFakeNewReview();
+    it('should dispatch addReviewAction when POST /comments if response 404', async () => {
+      const fakeUserReview = makeFakeNewReview();
 
-    const url = `${APIRoute.Reviews}/${fakeUserReview.offerId}`;
+      const url = `${APIRoute.Reviews}/${fakeUserReview.offerId}`;
 
-    mockAPI
-      .onPost(url)
-      .reply(404);
+      mockAPI
+        .onPost(url)
+        .reply(404);
 
-    const store = mockStore();
+      const store = mockStore();
 
-    await store.dispatch(addReviewAction(fakeUserReview));
+      await store.dispatch(addReviewAction(fakeUserReview));
 
-    const actions = store.getActions().map(({ type }) => type);
+      const actions = store.getActions().map(({ type }) => type);
 
-    expect(actions).toEqual([
-      addReviewAction.pending.type,
-      addReviewAction.rejected.type
-    ]);
+      expect(actions).toEqual([
+        addReviewAction.pending.type,
+        addReviewAction.rejected.type
+      ]);
+    });
   });
 });
