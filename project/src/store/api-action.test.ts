@@ -3,10 +3,26 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createAPI } from '../services/api';
-import { addReviewAction, checkAuthAction, fetchNearOffersAction, fetchOfferIdAction, fetchOffersAction, fetchReviewsAction, logOutAction, loginAction } from './api-actions';
+import {
+  addReviewAction,
+  checkAuthAction,
+  fetchNearOffersAction,
+  fetchOfferIdAction,
+  fetchOffersAction,
+  fetchReviewsAction,
+  logOutAction,
+  loginAction
+} from './api-actions';
 import { State } from '../types/state';
 import { APIRoute } from '../const';
-import { makeFackeAuthUserData, makeFackeOfferData, makeFackeOffersData, makeFackeReview, makeFackeReviews, makeFackeUserData, makeFakeNewReview } from '../mocks/mocks';
+import {
+  makeFackeAuthUserData,
+  makeFackeOfferData,
+  makeFackeOffersData,
+  makeFackeReviews,
+  makeFackeUserData,
+  makeFakeNewReview
+} from '../mocks/mocks';
 import { redirectToRoute } from './action';
 import { datatype } from 'faker';
 
