@@ -75,3 +75,5 @@ export const makeFakeNewReview = (): NewReview => ({
   comment: lorem.paragraph(1),
   rating: datatype.float(5),
 });
+
+export const makeFakeId = (): number => (datatype.number());
