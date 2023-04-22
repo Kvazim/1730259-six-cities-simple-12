@@ -1,6 +1,6 @@
 import { RefObject, memo, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { SortType } from '../../consts';
+import { SortType } from '../../const';
 import { useAppSelector } from '../../hooks';
 import cn from 'classnames';
 import { getChangeSortType } from '../../store/location-sorting-procces/location-sorting-procces.selector';

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
-import { AppRoute, CITIES, PASSWORD_REG_EXP } from '../../consts';
+import { AppRoute, CITIES, PASSWORD_REG_EXP } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { getRandomArrayItem } from '../../utils/utils';
 import { changeCity } from '../../store/location-sorting-procces/location-sorting-procces.slise';

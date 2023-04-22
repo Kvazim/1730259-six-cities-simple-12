@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus, Status } from '../../consts';
+import { AppRoute, AuthorizationStatus, Status } from '../../const';
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
 import Property from '../../pages/ptoperty/property';

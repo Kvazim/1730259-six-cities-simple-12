@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { SIMILAR_AD_COUNT } from '../../consts';
+import { SIMILAR_AD_COUNT } from '../../const';
 import { Reviews } from '../../types/reviews';
 import ReviewsItem from '../reviews-item/reviews-item';
 

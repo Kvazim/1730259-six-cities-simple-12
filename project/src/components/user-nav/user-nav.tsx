@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AuthorizationStatus } from '../../consts';
+import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logOutAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getUserData } from '../../store/user-process/user-process.selector';

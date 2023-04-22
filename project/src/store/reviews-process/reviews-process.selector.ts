@@ -1,4 +1,4 @@
-import { NameSpace, Status } from '../../consts';
+import { NameSpace, Status } from '../../const';
 import { Reviews } from '../../types/reviews';
 import { State } from '../../types/state';
 

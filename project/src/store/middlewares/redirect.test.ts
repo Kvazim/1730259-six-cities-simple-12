@@ -1,18 +1,18 @@
-import {configureMockStore} from '@jedmao/redux-mock-store';
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import { redirect } from './redirect';
 import { State } from '../../types/state';
 import { AnyAction } from '@reduxjs/toolkit';
 import { redirectToRoute } from '../action';
-import { AppRoute } from '../../consts';
+import { AppRoute } from '../../const';
 
 const fakeHistory = {
-  location: {pathname: ''},
+  location: { pathname: '' },
   push(path: string) {
     this.location.pathname = path;
   },
 };
 
-jest.mock('../../browser-history', ()=> fakeHistory);
+jest.mock('../../browser-history', () => fakeHistory);
 
 const middlewares = [redirect];
 const mockStore = configureMockStore<State, AnyAction>(middlewares);
@@ -32,7 +32,7 @@ describe('Middleware: redirect', () => {
   });
 
   it('should not to be redirect not found page because bad action', () => {
-    store.dispatch({type: 'UNKNOWN_ACTION', payload: AppRoute.PageNotFound});
+    store.dispatch({ type: 'UNKNOWN_ACTION', payload: AppRoute.PageNotFound });
     expect(fakeHistory.location.pathname).not.toBe(AppRoute.PageNotFound);
   });
 });

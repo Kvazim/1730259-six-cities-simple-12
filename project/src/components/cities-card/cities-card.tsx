@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/cards';
 import { changeInPercent, capitalize } from '../../utils/utils';
-import { AppRoute } from '../../consts';
+import { AppRoute } from '../../const';
 import Premium from '../premium/premium';
 import { memo } from 'react';
 
@@ -24,7 +24,7 @@ function CitiesCard({ offer, onFocusCard, className }: CitiesCardProp): JSX.Elem
         onFocusCard && (() => onFocusCard(null))
       }
     >
-      { isPremium && <Premium className={'place-card__mark'} /> }
+      {isPremium && <Premium className={'place-card__mark'} />}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />

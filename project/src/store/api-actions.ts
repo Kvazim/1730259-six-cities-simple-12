@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { OfferId, Offers, Offer } from '../types/cards';
-import { APIRoute, AppRoute } from '../consts';
+import { APIRoute, AppRoute } from '../const';
 import { redirectToRoute } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';

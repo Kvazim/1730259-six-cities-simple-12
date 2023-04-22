@@ -1,8 +1,9 @@
-import { datatype, helpers, image, internet } from 'faker';
+import { datatype, helpers, image, internet, lorem } from 'faker';
 import { UserData } from '../types/user-data';
 import { Offer, Offers } from '../types/cards';
-import { CITIES } from '../consts';
-import { Review, Reviews } from '../types/reviews';
+import { CITIES } from '../const';
+import { NewReview, Review, Reviews } from '../types/reviews';
+import { AuthData } from '../types/auth-data';
 
 export const makeFackeUserData = (): UserData => ({
   id: datatype.number(),
@@ -11,6 +12,11 @@ export const makeFackeUserData = (): UserData => ({
   avatarUrl: internet.avatar(),
   isPro: datatype.boolean(),
   name: internet.userName(),
+});
+
+export const makeFackeAuthUserData = (): AuthData => ({
+  login: internet.email(),
+  password: datatype.string()
 });
 
 export const makeFackeOfferData = (): Offer => ({
@@ -63,3 +69,9 @@ export const makeFackeReview = (): Review => ({
 });
 
 export const makeFackeReviews = (): Reviews => (datatype.array(10).map(() => makeFackeReview()));
+
+export const makeFakeNewReview = (): NewReview => ({
+  offerId: datatype.number(),
+  comment: lorem.paragraph(1),
+  rating: datatype.float(5),
+});

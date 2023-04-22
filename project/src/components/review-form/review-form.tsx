@@ -1,5 +1,5 @@
 import RatingStars from '../rating-stars/rating-stars';
-import { stars, STAR_NAME, MIN_VALUE_REVIEW_LENGHT, MAX_VALUE_REVIEW_LENGHT, Status } from '../../consts';
+import { stars, STAR_NAME, MIN_VALUE_REVIEW_LENGHT, MAX_VALUE_REVIEW_LENGHT, Status } from '../../const';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';

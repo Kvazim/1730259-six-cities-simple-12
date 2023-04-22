@@ -1,4 +1,4 @@
-import { Status } from '../../consts';
+import { Status } from '../../const';
 import { makeFackeOfferData, makeFackeOffersData } from '../../mocks/mocks';
 import { OfferData } from '../../types/state';
 import { fetchNearOffersAction, fetchOfferIdAction, fetchOffersAction } from '../api-actions';
@@ -22,7 +22,7 @@ describe('Reducer: offers', () => {
   });
 
   it('without additional parameters should return initial state', () => {
-    expect(offerData.reducer(void 0, {type: 'UNKNOWN_ACTION'}))
+    expect(offerData.reducer(void 0, { type: 'UNKNOWN_ACTION' }))
       .toEqual(initialState);
   });
 
@@ -30,7 +30,7 @@ describe('Reducer: offers', () => {
     it('should update offersAction by pending offers', () => {
       const modifiedState = getModifiedState(initialState);
       modifiedState.offerLoadingStatus = Status.Loading;
-      expect(offerData.reducer(initialState, {type: fetchOffersAction.pending.type}))
+      expect(offerData.reducer(initialState, { type: fetchOffersAction.pending.type }))
         .toEqual(modifiedState);
     });
 
@@ -38,14 +38,14 @@ describe('Reducer: offers', () => {
       const modifiedState = getModifiedState(initialState);
       modifiedState.offers = fackeOffersData;
       modifiedState.offerLoadingStatus = Status.Success;
-      expect(offerData.reducer(initialState, {type: fetchOffersAction.fulfilled.type, payload: fackeOffersData}))
+      expect(offerData.reducer(initialState, { type: fetchOffersAction.fulfilled.type, payload: fackeOffersData }))
         .toEqual(modifiedState);
     });
 
     it('should update offersAction by rejected offers', () => {
       const modifiedState = getModifiedState(initialState);
       modifiedState.offerLoadingStatus = Status.Failed;
-      expect(offerData.reducer(initialState, {type: fetchOffersAction.rejected.type}))
+      expect(offerData.reducer(initialState, { type: fetchOffersAction.rejected.type }))
         .toEqual(modifiedState);
     });
   });
@@ -54,7 +54,7 @@ describe('Reducer: offers', () => {
     it('should update offerIdAction by pending', () => {
       const modifiedState = getModifiedState(initialState);
       modifiedState.statusCurrentOffer = Status.Loading;
-      expect(offerData.reducer(initialState, {type: fetchOfferIdAction.pending.type}))
+      expect(offerData.reducer(initialState, { type: fetchOfferIdAction.pending.type }))
         .toEqual(modifiedState);
     });
 
@@ -62,14 +62,14 @@ describe('Reducer: offers', () => {
       const modifiedState = getModifiedState(initialState);
       modifiedState.currentOffer = fackeOfferData;
       modifiedState.statusCurrentOffer = Status.Success;
-      expect(offerData.reducer(initialState, {type: fetchOfferIdAction.fulfilled.type, payload: fackeOfferData}))
+      expect(offerData.reducer(initialState, { type: fetchOfferIdAction.fulfilled.type, payload: fackeOfferData }))
         .toEqual(modifiedState);
     });
 
     it('should update offerIdAction by rejected', () => {
       const modifiedState = getModifiedState(initialState);
       modifiedState.statusCurrentOffer = Status.Failed;
-      expect(offerData.reducer(initialState, {type: fetchOfferIdAction.rejected.type}))
+      expect(offerData.reducer(initialState, { type: fetchOfferIdAction.rejected.type }))
         .toEqual(modifiedState);
     });
   });
@@ -78,7 +78,7 @@ describe('Reducer: offers', () => {
     it('should update NearOffersAction by load offers', () => {
       const modifiedState = getModifiedState(initialState);
       modifiedState.nearOffers = fackeOffersData;
-      expect(offerData.reducer(initialState, {type: fetchNearOffersAction.fulfilled.type, payload: fackeOffersData}))
+      expect(offerData.reducer(initialState, { type: fetchNearOffersAction.fulfilled.type, payload: fackeOffersData }))
         .toEqual(modifiedState);
     });
   });

@@ -4,7 +4,7 @@ import PropertyDescription from '../../components/property-description/property-
 import PropertyInside from '../../components/property-inside/property-inside';
 import PropertyPhoto from '../../components/property-photo/property-photo';
 import { changeInPercent, capitalize } from '../../utils/utils';
-import { AppRoute, MAX_IMAGES_OFFER, Status } from '../../consts';
+import { AppRoute, MAX_IMAGES_OFFER, Status } from '../../const';
 import Premium from '../../components/premium/premium';
 import Map from '../../components/map/map';
 import CitiesCard from '../../components/cities-card/cities-card';
