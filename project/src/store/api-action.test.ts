@@ -39,17 +39,17 @@ describe('Async action', () => {
 
   describe('Async auth action', () => {
     it('should authorization status is «auth» when server return 200', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
 
       mockAPI
         .onGet(APIRoute.Login)
         .reply(200, []);
 
-      expect(store.getActions()).toEqual([]);
+      expect(fakeStore.getActions()).toEqual([]);
 
-      await store.dispatch(checkAuthAction());
+      await fakeStore.dispatch(checkAuthAction());
 
-      const actions = store.getActions().map(({ type }) => type);
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         checkAuthAction.pending.type,
@@ -58,7 +58,7 @@ describe('Async action', () => {
     });
 
     it('should dispatch loginAction when POST /login', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
       Storage.prototype.setItem = jest.fn();
       const fakeAutorizationUserData = makeFackeAuthUserData();
       const fakeToken = makeFackeUserData();
@@ -67,9 +67,9 @@ describe('Async action', () => {
         .onPost(APIRoute.Login)
         .reply(200, { token: fakeToken.token });
 
-      await store.dispatch(loginAction(fakeAutorizationUserData));
+      await fakeStore.dispatch(loginAction(fakeAutorizationUserData));
 
-      const actions = store.getActions().map(({ type }) => type);
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         loginAction.pending.type,
@@ -82,16 +82,16 @@ describe('Async action', () => {
     });
 
     it('should dispatch Logout when Delete /logout', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
       Storage.prototype.removeItem = jest.fn();
 
       mockAPI
         .onDelete(APIRoute.Logout)
         .reply(204);
 
-      await store.dispatch(logOutAction());
+      await fakeStore.dispatch(logOutAction());
 
-      const actions = store.getActions().map(({ type }) => type);
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         logOutAction.pending.type,
@@ -105,15 +105,15 @@ describe('Async action', () => {
 
   describe('Async offer action', () => {
     it('responds with a list of offers from hosts if response 200', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
       const fakeOffersData = makeFackeOffersData();
 
       mockAPI
         .onGet(APIRoute.Offers)
         .reply(200, fakeOffersData);
 
-      await store.dispatch(fetchOffersAction());
-      const actions = store.getActions().map(({ type }) => type);
+      await fakeStore.dispatch(fetchOffersAction());
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         fetchOffersAction.pending.type,
@@ -122,14 +122,14 @@ describe('Async action', () => {
     });
 
     it('responds with a list of offers from hosts if response 404', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
 
       mockAPI
         .onGet(APIRoute.Offers)
         .reply(404);
 
-      await store.dispatch(fetchOffersAction());
-      const actions = store.getActions().map(({ type }) => type);
+      await fakeStore.dispatch(fetchOffersAction());
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         fetchOffersAction.pending.type,
@@ -138,7 +138,7 @@ describe('Async action', () => {
     });
 
     it('should dispatch fetchOfferIdAction return 200', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
       const fakeOfferData = makeFackeOfferData();
       const fakeId = makeFakeId();
       const url = `${APIRoute.Offers}/${fakeId}`;
@@ -147,8 +147,8 @@ describe('Async action', () => {
         .onGet(url)
         .reply(200, fakeOfferData);
 
-      await store.dispatch(fetchOfferIdAction(fakeId));
-      const actions = store.getActions().map(({ type }) => type);
+      await fakeStore.dispatch(fetchOfferIdAction(fakeId));
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         fetchOfferIdAction.pending.type,
@@ -157,7 +157,7 @@ describe('Async action', () => {
     });
 
     it('should dispatch fetchOfferIdAction return 404', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
       const fakeId = makeFakeId();
       const url = `${APIRoute.Offers}/${fakeId}`;
 
@@ -165,8 +165,8 @@ describe('Async action', () => {
         .onGet(url)
         .reply(404);
 
-      await store.dispatch(fetchOfferIdAction(fakeId));
-      const actions = store.getActions().map(({ type }) => type);
+      await fakeStore.dispatch(fetchOfferIdAction(fakeId));
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         fetchOfferIdAction.pending.type,
@@ -175,7 +175,7 @@ describe('Async action', () => {
     });
 
     it('should dispatch fetchNearOffersAction return 200', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
       const fakeOffersData = makeFackeOffersData();
       const fakeId = makeFakeId();
       const url = `${APIRoute.Offers}/${fakeId}/nearby`;
@@ -184,8 +184,8 @@ describe('Async action', () => {
         .onGet(url)
         .reply(200, fakeOffersData);
 
-      await store.dispatch(fetchNearOffersAction(fakeId));
-      const actions = store.getActions().map(({ type }) => type);
+      await fakeStore.dispatch(fetchNearOffersAction(fakeId));
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         fetchNearOffersAction.pending.type,
@@ -194,7 +194,7 @@ describe('Async action', () => {
     });
 
     it('should dispatch fetchNearOffersAction return 404', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
       const fakeId = makeFakeId();
       const url = `${APIRoute.Offers}/${fakeId}/nearby`;
 
@@ -202,8 +202,8 @@ describe('Async action', () => {
         .onGet(url)
         .reply(404);
 
-      await store.dispatch(fetchNearOffersAction(fakeId));
-      const actions = store.getActions().map(({ type }) => type);
+      await fakeStore.dispatch(fetchNearOffersAction(fakeId));
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         fetchNearOffersAction.pending.type,
@@ -214,7 +214,7 @@ describe('Async action', () => {
 
   describe('Async reviews action', () => {
     it('responds with a list of reviews from hosts if response 200', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
       const fakeId = makeFakeId();
       const url = `${APIRoute.Reviews}/${fakeId}`;
       const fakeReviewsData = makeFackeReviews();
@@ -223,8 +223,8 @@ describe('Async action', () => {
         .onGet(url)
         .reply(200, fakeReviewsData);
 
-      await store.dispatch(fetchReviewsAction(fakeId));
-      const actions = store.getActions().map(({ type }) => type);
+      await fakeStore.dispatch(fetchReviewsAction(fakeId));
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         fetchReviewsAction.pending.type,
@@ -233,7 +233,7 @@ describe('Async action', () => {
     });
 
     it('responds with a list of reviews from hosts if response 404', async () => {
-      const store = mockStore();
+      const fakeStore = mockStore();
       const fakeId = makeFakeId();
       const url = `${APIRoute.Reviews}/${fakeId}`;
 
@@ -241,8 +241,8 @@ describe('Async action', () => {
         .onGet(url)
         .reply(404);
 
-      await store.dispatch(fetchReviewsAction(fakeId));
-      const actions = store.getActions().map(({ type }) => type);
+      await fakeStore.dispatch(fetchReviewsAction(fakeId));
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         fetchReviewsAction.pending.type,
@@ -260,11 +260,11 @@ describe('Async action', () => {
         .onPost(url)
         .reply(200, fakeReviews);
 
-      const store = mockStore();
+      const fakeStore = mockStore();
 
-      await store.dispatch(addReviewAction(fakeUserReview));
+      await fakeStore.dispatch(addReviewAction(fakeUserReview));
 
-      const actions = store.getActions().map(({ type }) => type);
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         addReviewAction.pending.type,
@@ -281,11 +281,11 @@ describe('Async action', () => {
         .onPost(url)
         .reply(404);
 
-      const store = mockStore();
+      const fakeStore = mockStore();
 
-      await store.dispatch(addReviewAction(fakeUserReview));
+      await fakeStore.dispatch(addReviewAction(fakeUserReview));
 
-      const actions = store.getActions().map(({ type }) => type);
+      const actions = fakeStore.getActions().map(({ type }) => type);
 
       expect(actions).toEqual([
         addReviewAction.pending.type,
