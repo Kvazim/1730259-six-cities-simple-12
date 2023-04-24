@@ -1,4 +1,4 @@
-import { Status } from '../../consts';
+import { Status } from '../../const';
 import { useAppSelector } from '../../hooks';
 import PlacesEmpty from '../../pages/places-empty/places-empty';
 import { getOfferStatus } from '../../store/offer-procces/offer-procces.selector';

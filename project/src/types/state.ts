@@ -1,5 +1,5 @@
-import { AuthorizationStatus, SortType, Status } from '../consts.js';
-import {store} from '../store/index.js';
+import { AuthorizationStatus, SortType, Status } from '../const.js';
+import { store } from '../store/index.js';
 import { Offer, Offers } from './cards.js';
 import { Reviews } from './reviews.js';
 import { UserData } from './user-data.js';

@@ -1,7 +1,7 @@
 import { Offer, Offers } from '../../types/cards';
 import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../consts';
+import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 

@@ -1,6 +1,6 @@
-import {useState, useRef, useEffect, MutableRefObject} from 'react';
+import { useState, useRef, useEffect, MutableRefObject } from 'react';
 import leaflet, { Map } from 'leaflet';
-import { LeafletParameters } from '../consts';
+import { LeafletParameters } from '../const';
 import { Location } from '../types/cards';
 
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: Location) {
@@ -9,8 +9,8 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: Location) {
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
-      const {latitude, longitude, zoom} = city;
-      const {TILE_LAYER, ATTRIBUTION} = LeafletParameters;
+      const { latitude, longitude, zoom } = city;
+      const { TILE_LAYER, ATTRIBUTION } = LeafletParameters;
       const instance = leaflet.map(mapRef.current, {
         center: {
           lat: latitude,
@@ -19,7 +19,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: Location) {
         zoom: zoom,
       });
 
-      leaflet.tileLayer(TILE_LAYER, {attribution: ATTRIBUTION}).addTo(instance);
+      leaflet.tileLayer(TILE_LAYER, { attribution: ATTRIBUTION }).addTo(instance);
 
       setMap(instance);
       isRenderedRef.current = true;

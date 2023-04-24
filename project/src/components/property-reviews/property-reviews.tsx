@@ -1,4 +1,4 @@
-import { AuthorizationStatus, Status } from '../../consts';
+import { AuthorizationStatus, Status } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
 import ReviewForm from '../review-form/review-form';

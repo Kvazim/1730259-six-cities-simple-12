@@ -1,4 +1,4 @@
-import { DEFAULT_SORT, SortType } from '../consts';
+import { DEFAULT_SORT, SortType } from '../const';
 import { Offers } from '../types/cards';
 
 export const changeInPercent = (item: number) => `${String(Math.round(item) / 0.05)}%`;
@@ -8,7 +8,7 @@ export const capitalize = (item: string): string => item.charAt(0).toUpperCase()
 export const getCurrentOffers = (city: string, offers: Offers) => offers.filter((offer) => offer.city.name === city);
 
 export const getSortingCurrentOffers = (offers: Offers, sortType = DEFAULT_SORT) => {
-  switch(sortType) {
+  switch (sortType) {
     case SortType.LowPrice:
       return offers.slice().sort((a, b) => a.price - b.price);
     case SortType.HightPrice:
@@ -20,4 +20,4 @@ export const getSortingCurrentOffers = (offers: Offers, sortType = DEFAULT_SORT)
   }
 };
 
-export const getRandomArrayItem = (items: string[] | number[]):string | number => items[Math.floor(Math.random() * items.length)];
+export const getRandomArrayItem = (items: string[] | number[]): string | number => items[Math.floor(Math.random() * items.length)];

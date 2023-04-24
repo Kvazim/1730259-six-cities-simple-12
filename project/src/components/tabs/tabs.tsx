@@ -1,4 +1,4 @@
-import { CITIES } from '../../consts';
+import { CITIES } from '../../const';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import cn from 'classnames';

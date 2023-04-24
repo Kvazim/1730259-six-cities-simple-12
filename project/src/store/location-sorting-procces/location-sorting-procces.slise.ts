@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DEFAULT_CITIES, DEFAULT_SORT, NameSpace, SortType } from '../../consts';
+import { DEFAULT_CITIES, DEFAULT_SORT, NameSpace, SortType } from '../../const';
 import { LocationSortingProcces } from '../../types/state';
 
 const initialState: LocationSortingProcces = {
@@ -20,4 +20,4 @@ export const changeLocationSorting = createSlice({
   },
 });
 
-export const {changeCity, changeSortType} = changeLocationSorting.actions;
+export const { changeCity, changeSortType } = changeLocationSorting.actions;
