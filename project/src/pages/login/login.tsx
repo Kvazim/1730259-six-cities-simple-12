@@ -1,21 +1,29 @@
-import { FormEvent, SyntheticEvent, useRef, useState } from 'react';
+import { FormEvent, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
-import { AppRoute, CITIES, PASSWORD_REG_EXP } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { AppRoute, AuthorizationStatus, CITIES, PASSWORD_REG_EXP } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRandomArrayItem } from '../../utils/utils';
 import { changeCity } from '../../store/location-sorting-procces/location-sorting-procces.slise';
 import { toast } from 'react-toastify';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
 
 function Login(): JSX.Element {
-  const [randomCity,] = useState(getRandomArrayItem(CITIES));
+  const isAuthChecked = useAppSelector(getAuthorizationStatus);
+  const [randomCity,] = useState(getRandomArrayItem<typeof CITIES>(Object.assign([], CITIES)));
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthChecked === AuthorizationStatus.Auth) {
+      navigate(AppRoute.Root, { replace: true });
+    }
+  });
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -39,7 +47,7 @@ function Login(): JSX.Element {
 
   const onClickRandomCity = (evt: SyntheticEvent<EventTarget>) => {
     evt.preventDefault();
-    dispatch(changeCity(randomCity as string));
+    dispatch(changeCity(randomCity as unknown as string));
     navigate(AppRoute.Root, { replace: true });
   };
 

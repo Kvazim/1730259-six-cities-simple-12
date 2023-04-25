@@ -1,28 +1,29 @@
 import { Fragment, ChangeEvent } from 'react';
+import { STARS } from '../../const';
 
 type RatingStarsProps = {
-  stars: string[];
   isChecked: string;
   isDisabled: boolean;
   onChangeChecked: ({ target }: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function RatingStars({ stars, onChangeChecked, isChecked, isDisabled }: RatingStarsProps): JSX.Element {
+function RatingStars({ onChangeChecked, isChecked, isDisabled }: RatingStarsProps): JSX.Element {
   return (
-    <div className="reviews__rating-form form__rating" onChange={onChangeChecked}>
+    <div className="reviews__rating-form form__rating" >
       {
-        stars && stars.length > 0 && stars.map((title, index) => (
+        STARS.map((title, index) => (
           <Fragment key={title}>
             <input
               className="form__rating-input visually-hidden"
               name="rating"
-              value={`${stars.length - index}`}
-              id={`${stars.length - index}-stars`}
+              value={`${STARS.length - index}`}
+              id={`${STARS.length - index}-stars`}
               type="radio"
-              checked={isChecked === `${stars.length - index}`}
+              checked={isChecked === `${STARS.length - index}`}
               disabled={isDisabled}
+              onChange={onChangeChecked}
             />
-            <label htmlFor={`${stars.length - index}-stars`} className="reviews__rating-label form__rating-label" title={title}>
+            <label htmlFor={`${STARS.length - index}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"></use>
               </svg>

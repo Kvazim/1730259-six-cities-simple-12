@@ -25,7 +25,7 @@ export const CITIES = [
   'Amsterdam',
   'Hamburg',
   'Dusseldorf',
-];
+] as const;
 
 export const DEFAULT_CITIES = CITIES[0];
 
@@ -38,13 +38,13 @@ export enum SortType {
 
 export const DEFAULT_SORT = SortType.Popular;
 
-export const stars = [
+export const STARS = [
   'perfect',
   'good',
   'not bad',
   'badly',
   'terribly',
-];
+] as const;
 
 export const LeafletParameters = {
   TILE_LAYER: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
