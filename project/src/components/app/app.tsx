@@ -3,7 +3,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus, Status } from '../../const';
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
-import Property from '../../pages/ptoperty/property';
+import Property from '../../pages/property/property';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import Layout from '../layout/layout';
 import { useAppSelector } from '../../hooks';

@@ -4,7 +4,7 @@ import { getAuthorizationStatus } from '../../store/user-process/user-process.se
 import ReviewForm from '../review-form/review-form';
 import ReviewsList from '../reviews-list/reviews-list';
 import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process.selector';
-import ErrorRewiewsSreen from '../../components/error-rewiews-sreen/error-rewiews-sreen';
+import ErrorRewiewsSreen from '../error-reviews-screen/error-reviews-screen';
 
 type PropertyReviewsProps = {
   offerId: number;

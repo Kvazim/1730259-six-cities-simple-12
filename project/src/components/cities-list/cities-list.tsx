@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks';
 import PlacesEmpty from '../../pages/places-empty/places-empty';
 import { getOfferStatus } from '../../store/offer-procces/offer-procces.selector';
 import { Offers } from '../../types/cards';
-import ErrorOffersScreen from '../error-screen/error-offers-screen';
+import ErrorOffersScreen from '../error-offers-screen/error-offers-screen';
 
 import Places from '../places/places';
 

@@ -20,4 +20,6 @@ export const getSortingCurrentOffers = (offers: Offers, sortType = DEFAULT_SORT)
   }
 };
 
-export const getRandomArrayItem = (items: string[] | number[]): string | number => items[Math.floor(Math.random() * items.length)];
+export function getRandomArrayItem<T>(items: T[]) {
+  return items[Math.floor(Math.random() * items.length)];
+}

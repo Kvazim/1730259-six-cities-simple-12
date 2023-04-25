@@ -1,5 +1,5 @@
 import RatingStars from '../rating-stars/rating-stars';
-import { stars, STAR_NAME, MIN_VALUE_REVIEW_LENGHT, MAX_VALUE_REVIEW_LENGHT, Status } from '../../const';
+import { STAR_NAME, MIN_VALUE_REVIEW_LENGHT, MAX_VALUE_REVIEW_LENGHT, Status } from '../../const';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
@@ -60,7 +60,7 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <RatingStars stars={stars} isChecked={isChecked} onChangeChecked={onChangeChecked} isDisabled={isReviewLoading} />
+      <RatingStars isChecked={isChecked} onChangeChecked={onChangeChecked} isDisabled={isReviewLoading} />
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" value={value} onChange={onChangeValue} disabled={isReviewLoading}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

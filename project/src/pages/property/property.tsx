@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
 import { getNearOfferId, getOfferId, getStatusOfferId } from '../../store/offer-procces/offer-procces.selector';
-import ErrorOffersScreen from '../../components/error-screen/error-offers-screen';
+import ErrorOffersScreen from '../../components/error-offers-screen/error-offers-screen';
 
 function Property(): JSX.Element {
   const { id } = useParams();
