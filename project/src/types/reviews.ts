@@ -15,8 +15,6 @@ export type ReviewsItem = {
   review: Reviews;
 };
 
-export type ReviewsList = ReviewsItem[];
-
 export type NewReview = {
   offerId: number;
   comment: string;

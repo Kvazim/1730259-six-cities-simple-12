@@ -25,16 +25,16 @@ function Login(): JSX.Element {
     }
   });
 
-  const onSubmit = (authData: AuthData) => {
+  const handleSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
   };
 
-  const onClickSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleClickSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
       if (PASSWORD_REG_EXP.test(passwordRef.current.value)) {
-        onSubmit({
+        handleSubmit({
           login: loginRef.current.value,
           password: passwordRef.current.value,
         });
@@ -45,7 +45,7 @@ function Login(): JSX.Element {
     }
   };
 
-  const onClickRandomCity = (evt: SyntheticEvent<EventTarget>) => {
+  const handleClickRandomCity = (evt: SyntheticEvent<EventTarget>) => {
     evt.preventDefault();
     dispatch(changeCity(randomCity as unknown as string));
     navigate(AppRoute.Root, { replace: true });
@@ -61,7 +61,7 @@ function Login(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="" method="post" onSubmit={onClickSubmit}>
+            <form className="login__form form" action="" method="post" onSubmit={handleClickSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
@@ -89,7 +89,7 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.Root} onClick={(evt) => onClickRandomCity(evt)}>
+              <Link className="locations__item-link" to={AppRoute.Root} onClick={(evt) => handleClickRandomCity(evt)}>
                 <span>{randomCity}</span>
               </Link>
             </div>
