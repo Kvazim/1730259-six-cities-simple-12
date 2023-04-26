@@ -4,10 +4,10 @@ import { STARS } from '../../const';
 type RatingStarsProps = {
   isChecked: string;
   isDisabled: boolean;
-  onChangeChecked: ({ target }: ChangeEvent<HTMLInputElement>) => void;
+  handleChangeChecked: ({ target }: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function RatingStars({ onChangeChecked, isChecked, isDisabled }: RatingStarsProps): JSX.Element {
+function RatingStars({ handleChangeChecked, isChecked, isDisabled }: RatingStarsProps): JSX.Element {
   return (
     <div className="reviews__rating-form form__rating" >
       {
@@ -21,7 +21,7 @@ function RatingStars({ onChangeChecked, isChecked, isDisabled }: RatingStarsProp
               type="radio"
               checked={isChecked === `${STARS.length - index}`}
               disabled={isDisabled}
-              onChange={onChangeChecked}
+              onChange={handleChangeChecked}
             />
             <label htmlFor={`${STARS.length - index}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width="37" height="33">

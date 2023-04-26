@@ -62,8 +62,6 @@ export const SIMILAR_AD_COUNT = 10;
 
 export const MAX_IMAGES_OFFER = 6;
 
-export const SIMILAR_AD_OFFERS_COUNT = 3;
-
 export const STAR_NAME = 'rating';
 
 export const BASE_URL = 'https://12.react.pages.academy/six-cities-simple';

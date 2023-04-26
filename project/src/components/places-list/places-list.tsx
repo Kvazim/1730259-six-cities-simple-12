@@ -12,7 +12,7 @@ function PlacesList({offers, setFocusCard}: PlacesListProps): JSX.Element {
     <div className="cities__places-list places__list tabs__content">
       {
         offers.map((offer) => (
-          <CitiesCard key={offer.id} className={'cities'} offer={offer} onFocusCard={setFocusCard} />
+          <CitiesCard key={offer.id} className={'cities'} offer={offer} handleFocusCard={setFocusCard} />
         ))
       }
     </div>

@@ -17,14 +17,14 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
   const isReviewLoading = getReviewStatus === Status.Loading;
 
   const [isChecked, setIsChecked] = useState('0');
-  const onChangeChecked = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeChecked = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target.name === STAR_NAME) {
       setIsChecked(target.value);
     }
   };
 
   const [value, setValue] = useState('');
-  const onChangeValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChangeValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
   };
 
@@ -38,7 +38,7 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
     setValue('');
   };
 
-  const onClickSubmit = (evt: FormEvent) => {
+  const handleClickSubmit = (evt: FormEvent) => {
     evt.preventDefault();
     if (value && isChecked) {
       dispatch(addReviewAction({
@@ -60,15 +60,15 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <RatingStars isChecked={isChecked} onChangeChecked={onChangeChecked} isDisabled={isReviewLoading} />
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" value={value} onChange={onChangeValue} disabled={isReviewLoading}></textarea>
+      <RatingStars isChecked={isChecked} handleChangeChecked={handleChangeChecked} isDisabled={isReviewLoading} />
+      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" value={value} onChange={handleChangeValue} disabled={isReviewLoading}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
-          type="submit" onClick={onClickSubmit} disabled={isSubmitActive || isReviewLoading}
+          type="submit" onClick={handleClickSubmit} disabled={isSubmitActive || isReviewLoading}
         >
           Submit
         </button>

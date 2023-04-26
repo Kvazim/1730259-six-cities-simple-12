@@ -7,21 +7,21 @@ import { memo } from 'react';
 
 type CitiesCardProp = {
   offer: Offer;
-  onFocusCard?: (offer: Offer | null) => void;
+  handleFocusCard?: (offer: Offer | null) => void;
   className: string;
 }
 
-function CitiesCard({ offer, onFocusCard, className }: CitiesCardProp): JSX.Element {
+function CitiesCard({ offer, handleFocusCard, className }: CitiesCardProp): JSX.Element {
   const { isPremium, previewImage, price, title, type, id, rating } = offer;
 
   return (
     <article
       className={`${className}__card place-card`}
       onMouseEnter={
-        onFocusCard && (() => onFocusCard(offer))
+        handleFocusCard && (() => handleFocusCard(offer))
       }
       onMouseLeave={
-        onFocusCard && (() => onFocusCard(null))
+        handleFocusCard && (() => handleFocusCard(null))
       }
     >
       {isPremium && <Premium className={'place-card__mark'} />}
