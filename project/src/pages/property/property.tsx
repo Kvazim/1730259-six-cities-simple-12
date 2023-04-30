@@ -21,7 +21,7 @@ function Property(): JSX.Element {
   const offerId = Number(id);
   const dispatch = useAppDispatch();
   const isCurrentOfferLoading = useAppSelector(getStatusOfferId);
-  const currentOfer = useAppSelector(getOfferId);
+  const currentOffer = useAppSelector(getOfferId);
   const similarOffers = useAppSelector(getNearOfferId);
 
   useEffect(() => {
@@ -38,11 +38,11 @@ function Property(): JSX.Element {
     return <ErrorOffersScreen />;
   }
 
-  if (!currentOfer) {
+  if (!currentOffer) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
-  const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = currentOfer;
+  const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = currentOffer;
 
   return (
     <>
@@ -137,7 +137,7 @@ function Property(): JSX.Element {
               <PropertyReviews offerId={offerId} />
             </div>
           </div>
-          <Map className={'property'} offers={similarOffers.concat(currentOfer)} currrentPageProperty={currentOfer} />
+          <Map className={'property'} offers={similarOffers.concat(currentOffer)} currrentPageProperty={currentOffer} />
         </section>
         <div className="container">
           <section className="near-places places">
