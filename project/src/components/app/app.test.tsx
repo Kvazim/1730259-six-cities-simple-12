@@ -1,15 +1,27 @@
 import { render, screen } from '@testing-library/react';
+import { Action } from 'redux';
+import thunk from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
 import { AppRoute, AuthorizationStatus, DEFAULT_CITIES, Status } from '../../const';
 import { Provider } from 'react-redux';
 import HistoryRouter from '../history-router/history-router';
 import App from './app';
+import { State } from '../../types/state';
+import { ThunkDispatch } from '@reduxjs/toolkit';
+import { createAPI } from '../../services/api';
 import { makeFackeOfferData } from '../../mocks/mocks';
 
-const mockStore = configureMockStore();
 const fakeHistory = createMemoryHistory();
 const fakeCurrentOffer = makeFackeOfferData();
+const api = createAPI();
+const middlewares = [thunk.withExtraArgument(api)];
+
+const mockStore = configureMockStore<
+  State,
+  Action<string>,
+  ThunkDispatch<State, typeof api, Action>
+>(middlewares);
 
 const fakeStore = mockStore({
   USER: {authorizationStatus: AuthorizationStatus.NoAuth},
@@ -56,7 +68,7 @@ describe('Aplication Routing', () => {
     expect(global.scrollTo).toBeCalledTimes(1);
   });
 
-  test('should render "NotFoundPage" when user navigate to non-existent route"', () => {
+  it('should render "NotFoundPage" when user navigate to non-existent route"', () => {
     fakeHistory.push('/non-existent-route');
     render(fakeApp);
 
@@ -64,7 +76,7 @@ describe('Aplication Routing', () => {
   });
 
   it('should render property screen when user navigate to "/offer/id"', () => {
-    fakeHistory.push(`${AppRoute.Offer}${fakeCurrentOffer.id}`);
+    fakeHistory.push(`${AppRoute.Offer}1`);
 
     render(fakeApp);
 
